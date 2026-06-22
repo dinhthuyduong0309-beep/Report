@@ -173,14 +173,14 @@
         "nd": "Rà soát đưa dữ liệu đầu kỳ lên; dự kiến Go-live 01/07 phần mềm Kế toán và Kho",
         "dm": "Mrs Thủy",
         "cb": "Anh Cường kết hợp",
-        "dl": "15/06/2026",
-        "st": "overdue",
+        "dl": "30/06/2026",
+        "st": "active",
         "note": "Thủy báo cáo chi tiết"
       },
       {
         "s": 17,
         "nd": "Lên các báo cáo quản trị mẫu bằng Excel để thực hiện công tác số hoá",
-        "dm": "Mr Huy",
+        "dm": "Mr Huy, Mr. Sơn",
         "cb": "Anh Cường kết hợp",
         "dl": "30/06/2026",
         "st": "active",
@@ -198,7 +198,7 @@
       {
         "s": 19,
         "nd": "Thẩm định lại toàn bộ số liệu để soát vốn lên holding",
-        "dm": "Thủy",
+        "dm": "Mrs. Thủy",
         "cb": "Anh Cường, Chị Hiền kết hợp",
         "dl": "30/08/2026",
         "st": "soon",
