@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+      if (window.location.search === '') {
+        window.location.replace(window.location.href + '?t=' + Date.now());
+      }
+    </script>
+<title>Kế hoạch công việc CVL 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Inter',-apple-system,BlinkMacSystemFont,sans-serif;font-size:13px;color:#1e293b;background:#f0f2f5;min-height:100vh}
+.container{max-width:1160px;margin:0 auto;padding:20px 16px 40px}
+
+.header{background:linear-gradient(135deg,#1e3a5f 0%,#2d5a87 60%,#3b7dbd 100%);border-radius:16px;padding:28px 32px;margin-bottom:22px;color:#fff;position:relative;overflow:hidden}
+.header::after{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:rgba(255,255,255,.04);border-radius:50%}
+.header-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:14px;position:relative;z-index:1}
+.header-eyebrow{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.55;margin-bottom:6px}
+.header h1{font-size:22px;font-weight:700;letter-spacing:-.3px;margin:0}
+.header-sub{font-size:12px;opacity:.6;margin-top:7px}
+.header-actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:9px;font-size:12px;font-weight:600;cursor:pointer;border:none;transition:all .15s ease}
+.btn-add{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);color:#fff;backdrop-filter:blur(4px)}
+.btn-add:hover{background:rgba(255,255,255,.22)}
+.btn-export{background:#16a34a;color:#fff}
+.btn-export:hover{background:#15803d}
+.btn-save{background:#2563eb;color:#fff}
+.btn-save:hover{background:#1d4ed8}
+.btn-save.saving{background:#94a3b8;cursor:wait}
+.save-msg{position:fixed;top:20px;right:20px;padding:14px 22px;border-radius:10px;font-size:13px;font-weight:600;z-index:9999;animation:slideDown .3s ease;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.save-ok{background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0}
+.save-err{background:#fef2f2;color:#dc2626;border:1px solid #fecaca}
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:9998;display:flex;align-items:center;justify-content:center}
+.modal-box{background:#fff;border-radius:16px;padding:28px;max-width:520px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal-box h3{font-size:16px;color:#1e3a5f;margin-bottom:12px}
+.modal-box p{font-size:12px;color:#64748b;line-height:1.6;margin-bottom:12px}
+.modal-box ol{font-size:12px;color:#475569;line-height:1.8;margin:0 0 16px 18px}
+.modal-box input{width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:13px;margin-bottom:14px;outline:none;font-family:inherit}
+.modal-box input:focus{border-color:#2563eb}
+.modal-btns{display:flex;gap:8px;justify-content:flex-end}
+.btn-icon{font-size:15px;line-height:1}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(105px,1fr));gap:10px;margin-bottom:20px}
+.stat-card{background:#fff;border-radius:12px;padding:14px 10px;text-align:center;border:1px solid transparent;transition:transform .12s}
+.stat-card:hover{transform:translateY(-2px)}
+.stat-num{font-size:28px;font-weight:700;line-height:1.1}
+.stat-label{font-size:11px;margin-top:5px;font-weight:500;opacity:.8}
+
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:12px;flex-wrap:wrap}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.filter-btn{font-size:11px;font-weight:500;padding:6px 15px;border-radius:20px;border:1px solid #e2e8f0;background:#fff;color:#64748b;cursor:pointer;transition:all .12s;white-space:nowrap}
+.filter-btn:hover{border-color:#94a3b8}
+.filter-btn.active{background:#1e3a5f;color:#fff;border-color:#1e3a5f;font-weight:700}
+.filter-count{margin-left:3px;opacity:.65}
+.search-wrap{position:relative;min-width:210px}
+.search-wrap input{width:100%;padding:8px 12px 8px 34px;border-radius:9px;border:1px solid #e2e8f0;font-size:12px;outline:none;background:#fff;transition:border-color .15s}
+.search-wrap input:focus{border-color:#2d5a87}
+.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:14px;color:#94a3b8}
+
+.form-panel{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:22px 24px;margin-bottom:20px;animation:slideDown .2s ease}
+.form-title{font-size:14px;font-weight:700;color:#1e3a5f;margin-bottom:16px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px}
+.form-full{grid-column:1/-1}
+.form-label{display:block;font-size:11px;font-weight:600;color:#475569;margin-bottom:4px}
+.form-input,.form-select{width:100%;padding:9px 11px;border-radius:8px;border:1px solid #e2e8f0;font-size:12px;outline:none;background:#fff;font-family:inherit;transition:border-color .15s}
+.form-input:focus,.form-select:focus{border-color:#2d5a87}
+.form-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+.btn-cancel{padding:8px 20px;border-radius:8px;border:1px solid #d1d5db;background:#fff;font-size:12px;font-weight:600;color:#64748b;cursor:pointer}
+.btn-cancel:hover{background:#f8fafc}
+.btn-submit{padding:8px 24px;border-radius:8px;border:none;background:#1e3a5f;font-size:12px;font-weight:600;color:#fff;cursor:pointer}
+.btn-submit:hover{background:#16304d}
+.btn-submit:disabled{background:#94a3b8;cursor:not-allowed}
+
+.group{margin-bottom:22px}
+.group-header{background:linear-gradient(90deg,#1e3a5f,#2d5a87);color:#fff;font-size:12px;font-weight:700;padding:11px 18px;border-radius:12px 12px 0 0;letter-spacing:.3px;display:flex;justify-content:space-between;align-items:center}
+.group-count{font-weight:400;opacity:.6;font-size:11px}
+.group-body{background:#fff;border:1px solid #e2e8f0;border-top:none;border-radius:0 0 12px 12px;overflow:hidden}
+
+table{width:100%;border-collapse:collapse}
+thead th{padding:9px 12px;font-size:10px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;background:#f8fafc;border-bottom:1px solid #e2e8f0;text-align:left}
+thead th:first-child{text-align:center;width:42px}
+th.col-nd{width:auto}
+th.col-dm{width:115px}
+th.col-cb{width:135px}
+th.col-dl{width:100px}
+th.col-st{width:120px}
+th.col-act{width:38px}
+tbody tr{border-bottom:1px solid #f1f5f9;transition:background .08s}
+tbody tr:hover{background:#f8fafc}
+tbody tr:last-child{border-bottom:none}
+td{padding:11px 12px;vertical-align:top;font-size:12.5px;color:#1e293b;line-height:1.5}
+td:first-child{text-align:center;color:#94a3b8;font-size:11px;font-weight:600}
+
+/* Editable cells */
+.editable{cursor:pointer;border-radius:5px;padding:2px 4px;margin:-2px -4px;transition:background .1s;min-height:18px;position:relative}
+.editable:hover{background:#eef4fb}
+.editable:hover::after{content:'✎';position:absolute;right:-2px;top:-2px;font-size:9px;color:#94a3b8;opacity:.7}
+.edit-input{width:100%;padding:5px 8px;border:1.5px solid #2d5a87;border-radius:6px;font-size:12px;font-family:inherit;outline:none;background:#fff;box-shadow:0 0 0 3px rgba(45,90,135,.1)}
+
+.td-task{font-weight:500}
+.td-note{font-size:11px;color:#94a3b8;margin-top:3px;line-height:1.3}
+.td-dm{color:#475569;font-weight:500;font-size:12px}
+.td-cb{color:#94a3b8;font-size:11px}
+.td-dl{font-weight:600;font-size:12px}
+
+.status-select{font-size:11px;font-weight:600;padding:4px 8px;border-radius:7px;cursor:pointer;outline:none;border-width:1px;border-style:solid;font-family:inherit;appearance:auto;-webkit-appearance:auto}
+.ss-overdue{background:#fef2f2;color:#dc2626;border-color:#fecaca}
+.ss-urgent{background:#fffbeb;color:#d97706;border-color:#fde68a}
+.ss-active{background:#eff6ff;color:#2563eb;border-color:#bfdbfe}
+.ss-soon{background:#f9fafb;color:#6b7280;border-color:#e5e7eb}
+.ss-done{background:#f0fdf4;color:#16a34a;border-color:#bbf7d0}
+
+.milestone-row td{background:#f5f3ff!important;text-align:center;padding:13px 16px;border-bottom:1px solid #ede9fe}
+.milestone-text{font-size:13px;font-weight:700;color:#7c3aed;letter-spacing:.3px}
+
+.btn-del{background:none;border:none;cursor:pointer;font-size:14px;color:#cbd5e1;padding:2px 4px;line-height:1;border-radius:4px;transition:all .12s}
+.btn-del:hover{color:#ef4444;background:#fef2f2}
+
+.dl-overdue{color:#dc2626}.dl-urgent{color:#d97706}.dl-active{color:#2563eb}.dl-soon{color:#6b7280}.dl-done{color:#16a34a}.dl-milestone{color:#7c3aed}
+
+.empty{text-align:center;padding:52px 20px;color:#94a3b8}
+.empty-icon{font-size:38px;margin-bottom:8px}
+.empty-text{font-size:13px}
+
+.footer{text-align:center;padding:20px 0 8px;font-size:11px;color:#94a3b8;border-top:1px solid #f1f5f9;margin-top:12px}
+
+.edit-hint{background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:8px 14px;margin-bottom:16px;font-size:11px;color:#2563eb;display:flex;align-items:center;gap:8px}
+.edit-hint-icon{font-size:15px}
+
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:700px){
+  .form-grid{grid-template-columns:1fr}
+  .header h1{font-size:18px}
+  .container{padding:12px 10px 30px}
+  th.col-cb,td:nth-child(4){display:none}
+  th.col-dm{width:80px}
+  th.col-dl{width:75px}
+  th.col-st{width:95px}
+  .edit-hint{display:none}
+}
+@media print{
+  body{background:#fff}
+  .header-actions,.toolbar,.btn-del,.form-panel,.edit-hint{display:none!important}
+  .editable:hover::after{display:none}
+  .header{border-radius:0;padding:16px 20px}
+  .group-header{border-radius:0}
+  .group-body{border-radius:0}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <div class="header-eyebrow">DỰ ÁN SỐ HÓA</div>
+        <h1>Kế hoạch công việc CVL 2026</h1>
+        <div class="header-sub">Tổng hợp từ 3 cuộc họp 05–06/06/2026 · <span id="totalCount">61</span> công việc · <span id="mileCount">4</span> mốc Go-live</div>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-add" onclick="toggleForm()"><span class="btn-icon">+</span> Thêm công việc</button>
+        <button class="btn btn-export" onclick="exportExcel()"><span class="btn-icon">↓</span> Xuất Excel</button>
+        <button class="btn btn-save" onclick="saveToGitHub()"><span class="btn-icon">💾</span> Lưu thay đổi</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats" id="statsBar"><div class="stat-card" style="border-color:#fecaca">
+      <div class="stat-num" style="color:#dc2626">2</div>
+      <div class="stat-label" style="color:#dc2626">Quá hạn</div>
+    </div><div class="stat-card" style="border-color:#fde68a">
+      <div class="stat-num" style="color:#d97706">12</div>
+      <div class="stat-label" style="color:#d97706">Cấp bách</div>
+    </div><div class="stat-card" style="border-color:#bfdbfe">
+      <div class="stat-num" style="color:#2563eb">16</div>
+      <div class="stat-label" style="color:#2563eb">Đang thực hiện</div>
+    </div><div class="stat-card" style="border-color:#e5e7eb">
+      <div class="stat-num" style="color:#6b7280">28</div>
+      <div class="stat-label" style="color:#6b7280">Sắp tới</div>
+    </div><div class="stat-card" style="border-color:#bbf7d0">
+      <div class="stat-num" style="color:#16a34a">3</div>
+      <div class="stat-label" style="color:#16a34a">Hoàn thành</div>
+    </div></div>
+
+  <div class="edit-hint">
+    <span class="edit-hint-icon">✎</span>
+    <span>Bấm vào <b>Nội dung</b>, <b>Đầu mối</b>, <b>Thực hiện</b>, <b>Deadline</b> hoặc <b>Ghi chú</b> để sửa trực tiếp · Nhấn <b>Enter</b> hoặc bấm ra ngoài để lưu</span>
+  </div>
+
+  <div class="form-panel" id="formPanel" style="display: none;">
+    <div class="form-title">Thêm công việc mới</div>
+    <div class="form-grid">
+      <div class="form-full">
+        <label class="form-label">Nội dung công việc *</label>
+        <input class="form-input" id="fNd" placeholder="Mô tả công việc cần thực hiện...">
+      </div>
+      <div>
+        <label class="form-label">Đầu mối phụ trách</label>
+        <input class="form-input" id="fDm" placeholder="Người phụ trách">
+      </div>
+      <div>
+        <label class="form-label">Cán bộ thực hiện</label>
+        <input class="form-input" id="fCb" placeholder="Người thực hiện">
+      </div>
+      <div>
+        <label class="form-label">Deadline</label>
+        <input class="form-input" id="fDl" placeholder="VD: 30/06/2026">
+      </div>
+      <div>
+        <label class="form-label">Trạng thái</label>
+        <select class="form-select" id="fSt">
+          <option value="active">Đang thực hiện</option>
+          <option value="urgent">Cấp bách</option>
+          <option value="overdue">Quá hạn</option>
+          <option value="soon">Sắp tới</option>
+          <option value="done">Hoàn thành</option>
+        </select>
+      </div>
+      <div>
+        <label class="form-label">Nhóm công việc *</label>
+        <select class="form-select" id="fGroup"><option value="">— Chọn nhóm —</option><option value="g1">I. Đánh giá &amp; quyết định phần mềm</option><option value="g2">II. Xây dựng quy trình &amp; số hóa</option><option value="g3">III. Kiểm kê tài sản &amp; chuẩn hóa dữ liệu</option><option value="g4">IV. Triển khai phần mềm &amp; Go-live</option><option value="g5">V. Nhân sự, KPI &amp; vận hành</option><option value="g6">VI. Báo cáo, tích hợp &amp; số hóa toàn diện</option><option value="g7">VII. CNTT — Tích hợp hệ thống</option><option value="g8">VIII. CNTT — Tái cấu trúc PM Bán hàng</option><option value="g9">IX. CNTT — Tái cấu trúc PM Kế toán &amp; Kho</option><option value="g10">X. CNTT — Kế toán hợp nhất (Optional — nếu mô hình Mẹ-Con)</option></select>
+      </div>
+      <div>
+        <label class="form-label">Ghi chú</label>
+        <input class="form-input" id="fNote" placeholder="Ghi chú thêm...">
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn-cancel" onclick="toggleForm()">Hủy</button>
+      <button class="btn-submit" onclick="addTask()">Thêm công việc</button>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="filters" id="filterBar"><button class="filter-btn active" onclick="setFilter(&#39;all&#39;)">Tất cả</button><button class="filter-btn" onclick="setFilter(&#39;overdue&#39;)">Quá hạn <span class="filter-count">(2)</span></button><button class="filter-btn" onclick="setFilter(&#39;urgent&#39;)">Cấp bách <span class="filter-count">(12)</span></button><button class="filter-btn" onclick="setFilter(&#39;active&#39;)">Đang thực hiện <span class="filter-count">(16)</span></button><button class="filter-btn" onclick="setFilter(&#39;soon&#39;)">Sắp tới <span class="filter-count">(28)</span></button><button class="filter-btn" onclick="setFilter(&#39;done&#39;)">Hoàn thành <span class="filter-count">(3)</span></button></div>
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input id="searchInput" placeholder="Tìm kiếm công việc..." oninput="render()">
+    </div>
+  </div>
+
+  <div id="board"><div class="group">
+      <div class="group-header"><span>I. Đánh giá &amp; quyết định phần mềm</span><span class="group-count">8 việc</span></div>
+      <div class="group-body"><table>
+        <thead><tr>
+          <th>STT</th><th class="col-nd">Nội dung công việc</th><th class="col-dm">Đầu mối</th>
+          <th class="col-cb">Thực hiện</th><th class="col-dl">Deadline</th><th class="col-st">Trạng thái</th><th class="col-act"></th>
+        </tr></thead><tbody><tr>
+        <td>1</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g1&#39;,0,&#39;nd&#39;,this)">Làm việc với MISA, FAST và Bravo</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g1&#39;,0,&#39;note&#39;,this)">Chưa làm việc với Bravo</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g1&#39;,0,&#39;dm&#39;,this)">Loan</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g1&#39;,0,&#39;cb&#39;,this)">GĐ Cường, CFO Cường, Nhân</div>
+        </td>
+        <td>
+          <div class="td-dl dl-done editable" onclick="startEdit(&#39;g1&#39;,0,&#39;dl&#39;,this)">15/06/2026</div>
+        </td>
+        <td><select class="status-select ss-done" onchange="changeStatus(&#39;g1&#39;,0,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done" selected="">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g1&#39;,0)">✕</button></td>
+      </tr><tr>
+        <td>2</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g1&#39;,1,&#39;nd&#39;,this)">Lập file checklist mô tả ứng dụng cụ thể từng module theo từng phần mềm cho từng phòng ban</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g1&#39;,1,&#39;note&#39;,this)">Gửi để bộ phận tự đánh giá</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g1&#39;,1,&#39;dm&#39;,this)">Ban ĐH dự án</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g1&#39;,1,&#39;cb&#39;,this)">Tất cả phòng ban</div>
+        </td>
+        <td>
+          <div class="td-dl dl-urgent editable" onclick="startEdit(&#39;g1&#39;,1,&#39;dl&#39;,this)">Trước 21/06</div>
+        </td>
+        <td><select class="status-select ss-urgent" onchange="changeStatus(&#39;g1&#39;,1,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent" selected="">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g1&#39;,1)">✕</button></td>
+      </tr><tr>
+        <td>3</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g1&#39;,2,&#39;nd&#39;,this)">Các phòng ban nghiên cứu, đánh giá từng chức năng phần mềm theo nghiệp vụ thực tế</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g1&#39;,2,&#39;note&#39;,this)">Xác định: đáp ứng / còn thiếu / cần tùy chỉnh</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g1&#39;,2,&#39;dm&#39;,this)">Tất cả PB</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g1&#39;,2,&#39;cb&#39;,this)">Ban ĐH theo dõi</div>
+        </td>
+        <td>
+          <div class="td-dl dl-urgent editable" onclick="startEdit(&#39;g1&#39;,2,&#39;dl&#39;,this)">Trước 21/06</div>
+        </td>
+        <td><select class="status-select ss-urgent" onchange="changeStatus(&#39;g1&#39;,2,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent" selected="">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g1&#39;,2)">✕</button></td>
+      </tr><tr>
+        <td>4</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g1&#39;,3,&#39;nd&#39;,this)">Yêu cầu Bravo làm rõ: tích hợp API với POS, AI/trợ lý ảo, khả năng đáp ứng đặc thù CVL</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g1&#39;,3,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g1&#39;,3,&#39;dm&#39;,this)">Ông Cường, Bà Loan</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g1&#39;,3,&#39;cb&#39;,this)">Đại diện Bravo</div>
+        </td>
+        <td>
+          <div class="td-dl dl-urgent editable" onclick="startEdit(&#39;g1&#39;,3,&#39;dl&#39;,this)">Trước 21/06</div>
+        </td>
+        <td><select class="status-select ss-urgent" onchange="changeStatus(&#39;g1&#39;,3,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent" selected="">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g1&#39;,3)">✕</button></td>
+      </tr><tr>
+        <td>5</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g1&#39;,4,&#39;nd&#39;,this)">Yêu cầu MISA làm rõ: CRM chuyên sâu nhà hàng, chấm công đa cơ sở, hành trình khách hàng</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g1&#39;,4,&#39;note&#39;,this)">262K thành viên, hợp nhất đa kênh</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g1&#39;,4,&#39;dm&#39;,this)">Bà Loan, Bà Hằng, Bà Quỳnh</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g1&#39;,4,&#39;cb&#39;,this)">Đại diện MISA</div>
+        </td>
+        <td>
+          <div class="td-dl dl-urgent editable" onclick="startEdit(&#39;g1&#39;,4,&#39;dl&#39;,this)">Trước 21/06</div>
+        </td>
+        <td><select class="status-select ss-urgent" onchange="changeStatus(&#39;g1&#39;,4,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent" selected="">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g1&#39;,4)">✕</button></td>
+      </tr><tr>
+        <td>6</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g1&#39;,5,&#39;nd&#39;,this)">Ký hợp đồng với đơn vị phần mềm được chọn</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g1&#39;,5,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g1&#39;,5,&#39;dm&#39;,this)">Anh Cường</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g1&#39;,5,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-urgent editable" onclick="startEdit(&#39;g1&#39;,5,&#39;dl&#39;,this)">20/06/2026</div>
+        </td>
+        <td><select class="status-select ss-urgent" onchange="changeStatus(&#39;g1&#39;,5,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent" selected="">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g1&#39;,5)">✕</button></td>
+      </tr><tr>
+        <td>7</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g1&#39;,6,&#39;nd&#39;,this)">Chốt lựa chọn phần mềm cuối cùng (MISA hoặc Bravo)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g1&#39;,6,&#39;note&#39;,this)">Dựa trên nhu cầu thực tế</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g1&#39;,6,&#39;dm&#39;,this)">Ông Cường, Bà Loan</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g1&#39;,6,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-urgent editable" onclick="startEdit(&#39;g1&#39;,6,&#39;dl&#39;,this)">21/06/2026</div>
+        </td>
+        <td><select class="status-select ss-urgent" onchange="changeStatus(&#39;g1&#39;,6,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent" selected="">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g1&#39;,6)">✕</button></td>
+      </tr><tr>
+        <td>61</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g1&#39;,7,&#39;nd&#39;,this)">Rà soát user kế toán, user phần mềm bán hàng, user HRM toàn hệ thống CVL</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g1&#39;,7,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g1&#39;,7,&#39;dm&#39;,this)">Mr Cường CFO. Mrs Hiền KTT, Mrs Hằng HR</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g1&#39;,7,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-active editable" onclick="startEdit(&#39;g1&#39;,7,&#39;dl&#39;,this)">23/06/2026</div>
+        </td>
+        <td><select class="status-select ss-active" onchange="changeStatus(&#39;g1&#39;,7,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active" selected="">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g1&#39;,7)">✕</button></td>
+      </tr></tbody></table></div></div><div class="group">
+      <div class="group-header"><span>II. Xây dựng quy trình &amp; số hóa</span><span class="group-count">5 việc</span></div>
+      <div class="group-body"><table>
+        <thead><tr>
+          <th>STT</th><th class="col-nd">Nội dung công việc</th><th class="col-dm">Đầu mối</th>
+          <th class="col-cb">Thực hiện</th><th class="col-dl">Deadline</th><th class="col-st">Trạng thái</th><th class="col-act"></th>
+        </tr></thead><tbody><tr>
+        <td>8</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g2&#39;,0,&#39;nd&#39;,this)">Mô tả nghiệp vụ Bán hàng, nghiệp vụ Kho và đưa ra phương án cải tiến</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g2&#39;,0,&#39;note&#39;,this)">Đã hoàn thành</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g2&#39;,0,&#39;dm&#39;,this)">Loan</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g2&#39;,0,&#39;cb&#39;,this)">Thủy, Anh Cường</div>
+        </td>
+        <td>
+          <div class="td-dl dl-done editable" onclick="startEdit(&#39;g2&#39;,0,&#39;dl&#39;,this)">20/05/2026</div>
+        </td>
+        <td><select class="status-select ss-done" onchange="changeStatus(&#39;g2&#39;,0,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done" selected="">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g2&#39;,0)">✕</button></td>
+      </tr><tr>
+        <td>9</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g2&#39;,1,&#39;nd&#39;,this)">Chốt quy trình đề xuất mô hình BH-DT</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g2&#39;,1,&#39;note&#39;,this)">Họp chốt Thứ 3 – 09/06</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g2&#39;,1,&#39;dm&#39;,this)">Ông Cường, team CVL, Bà Thủy, bà Hoàng Anh</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g2&#39;,1,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-overdue editable" onclick="startEdit(&#39;g2&#39;,1,&#39;dl&#39;,this)">09/06/2026</div>
+        </td>
+        <td><select class="status-select ss-overdue" onchange="changeStatus(&#39;g2&#39;,1,this.value)"><option value="overdue" selected="">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g2&#39;,1)">✕</button></td>
+      </tr><tr>
+        <td>10</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g2&#39;,2,&#39;nd&#39;,this)">Xây dựng bộ quy trình mua sắm, nhập kho, điều chuyển, trả lại...</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g2&#39;,2,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g2&#39;,2,&#39;dm&#39;,this)">Bà Thủy</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g2&#39;,2,&#39;cb&#39;,this)">Bà Hoàng Anh thiết lập</div>
+        </td>
+        <td>
+          <div class="td-dl dl-active editable" onclick="startEdit(&#39;g2&#39;,2,&#39;dl&#39;,this)">25/06/2026</div>
+        </td>
+        <td><select class="status-select ss-active" onchange="changeStatus(&#39;g2&#39;,2,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active" selected="">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g2&#39;,2)">✕</button></td>
+      </tr><tr>
+        <td>11</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g2&#39;,3,&#39;nd&#39;,this)">Viết quy trình để số hoá lên phần mềm</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g2&#39;,3,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g2&#39;,3,&#39;dm&#39;,this)">Thủy</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g2&#39;,3,&#39;cb&#39;,this)">Hoàng Anh kết hợp</div>
+        </td>
+        <td>
+          <div class="td-dl dl-active editable" onclick="startEdit(&#39;g2&#39;,3,&#39;dl&#39;,this)">25/06/2026</div>
+        </td>
+        <td><select class="status-select ss-active" onchange="changeStatus(&#39;g2&#39;,3,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active" selected="">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g2&#39;,3)">✕</button></td>
+      </tr><tr>
+        <td>12</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g2&#39;,4,&#39;nd&#39;,this)">Nghiên cứu bố trí lại kho khoa học – chuẩn bị cân, thùng, Layout A1-B1-C1</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g2&#39;,4,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g2&#39;,4,&#39;dm&#39;,this)">Ông Cường + team CVL</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g2&#39;,4,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-active editable" onclick="startEdit(&#39;g2&#39;,4,&#39;dl&#39;,this)">30/06/2026</div>
+        </td>
+        <td><select class="status-select ss-active" onchange="changeStatus(&#39;g2&#39;,4,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active" selected="">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g2&#39;,4)">✕</button></td>
+      </tr></tbody></table></div></div><div class="group">
+      <div class="group-header"><span>III. Kiểm kê tài sản &amp; chuẩn hóa dữ liệu</span><span class="group-count">8 việc</span></div>
+      <div class="group-body"><table>
+        <thead><tr>
+          <th>STT</th><th class="col-nd">Nội dung công việc</th><th class="col-dm">Đầu mối</th>
+          <th class="col-cb">Thực hiện</th><th class="col-dl">Deadline</th><th class="col-st">Trạng thái</th><th class="col-act"></th>
+        </tr></thead><tbody><tr>
+        <td>13</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g3&#39;,0,&#39;nd&#39;,this)">Tổ chức kiểm kê TSCĐ, CCDC, Nguyên vật liệu – đồng nhất mã, làm sạch dữ liệu</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g3&#39;,0,&#39;note&#39;,this)">Ra báo cáo và hướng xử lý</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g3&#39;,0,&#39;dm&#39;,this)">Anh Cường (CFO)</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g3&#39;,0,&#39;cb&#39;,this)">Thủy kết hợp</div>
+        </td>
+        <td>
+          <div class="td-dl dl-done editable" onclick="startEdit(&#39;g3&#39;,0,&#39;dl&#39;,this)">10/06/2026</div>
+        </td>
+        <td><select class="status-select ss-done" onchange="changeStatus(&#39;g3&#39;,0,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done" selected="">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g3&#39;,0)">✕</button></td>
+      </tr><tr>
+        <td>14</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g3&#39;,1,&#39;nd&#39;,this)">Chốt bộ mã TSCĐ – CCDC, Nguyên vật liệu (đồng nhất mã toàn hệ thống)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g3&#39;,1,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g3&#39;,1,&#39;dm&#39;,this)">Bà Loan</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g3&#39;,1,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-active editable" onclick="startEdit(&#39;g3&#39;,1,&#39;dl&#39;,this)">Sau kiểm kê</div>
+        </td>
+        <td><select class="status-select ss-active" onchange="changeStatus(&#39;g3&#39;,1,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active" selected="">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g3&#39;,1)">✕</button></td>
+      </tr><tr>
+        <td>15</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g3&#39;,2,&#39;nd&#39;,this)">Rà soát tài sản, công nợ, hồ sơ pháp lý các công ty cũ</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g3&#39;,2,&#39;note&#39;,this)">Ưu tiên sáp nhập thay giải thể</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g3&#39;,2,&#39;dm&#39;,this)">Mrs. Thủy</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g3&#39;,2,&#39;cb&#39;,this)">Liên quan</div>
+        </td>
+        <td>
+          <div class="td-dl dl-active editable" onclick="startEdit(&#39;g3&#39;,2,&#39;dl&#39;,this)">Theo tiến độ</div>
+        </td>
+        <td><select class="status-select ss-active" onchange="changeStatus(&#39;g3&#39;,2,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active" selected="">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g3&#39;,2)">✕</button></td>
+      </tr><tr>
+        <td>16</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g3&#39;,3,&#39;nd&#39;,this)">Rà soát đưa dữ liệu đầu kỳ lên; dự kiến Go-live 01/07 phần mềm Kế toán và Kho</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g3&#39;,3,&#39;note&#39;,this)">Thủy báo cáo chi tiết</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g3&#39;,3,&#39;dm&#39;,this)">Mrs. Thủy</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g3&#39;,3,&#39;cb&#39;,this)">Anh Cường kết hợp</div>
+        </td>
+        <td>
+          <div class="td-dl dl-urgent editable" onclick="startEdit(&#39;g3&#39;,3,&#39;dl&#39;,this)">30/06/2026</div>
+        </td>
+        <td><select class="status-select ss-urgent" onchange="changeStatus(&#39;g3&#39;,3,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent" selected="">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g3&#39;,3)">✕</button></td>
+      </tr><tr>
+        <td>17</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g3&#39;,4,&#39;nd&#39;,this)">Lên các báo cáo quản trị mẫu bằng Excel để thực hiện công tác số hoá</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g3&#39;,4,&#39;note&#39;,this)">Huy báo cáo chi tiết</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g3&#39;,4,&#39;dm&#39;,this)">Huy</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g3&#39;,4,&#39;cb&#39;,this)">Anh Cường kết hợp</div>
+        </td>
+        <td>
+          <div class="td-dl dl-active editable" onclick="startEdit(&#39;g3&#39;,4,&#39;dl&#39;,this)">30/06/2026</div>
+        </td>
+        <td><select class="status-select ss-active" onchange="changeStatus(&#39;g3&#39;,4,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active" selected="">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g3&#39;,4)">✕</button></td>
+      </tr><tr>
+        <td>18</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g3&#39;,5,&#39;nd&#39;,this)">Lên bài thầu toàn bộ các hạng mục</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g3&#39;,5,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g3&#39;,5,&#39;dm&#39;,this)">Dương</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g3&#39;,5,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-urgent editable" onclick="startEdit(&#39;g3&#39;,5,&#39;dl&#39;,this)">15/06/2026</div>
+        </td>
+        <td><select class="status-select ss-urgent" onchange="changeStatus(&#39;g3&#39;,5,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent" selected="">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g3&#39;,5)">✕</button></td>
+      </tr><tr>
+        <td>19</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g3&#39;,6,&#39;nd&#39;,this)">Thẩm định lại toàn bộ số liệu để soát vốn lên holding</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g3&#39;,6,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g3&#39;,6,&#39;dm&#39;,this)">Thủy</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g3&#39;,6,&#39;cb&#39;,this)">Anh Cường, Chị Hiền kết hợp</div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g3&#39;,6,&#39;dl&#39;,this)">30/08/2026</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g3&#39;,6,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g3&#39;,6)">✕</button></td>
+      </tr><tr>
+        <td>60</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g3&#39;,7,&#39;nd&#39;,this)">Lên plan rà soát và làm sạch dữ liệu kho CCDC TSCD NVL</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g3&#39;,7,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g3&#39;,7,&#39;dm&#39;,this)">Mr Cường CFO</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g3&#39;,7,&#39;cb&#39;,this)">MS Hiền KTT</div>
+        </td>
+        <td>
+          <div class="td-dl dl-overdue editable" onclick="startEdit(&#39;g3&#39;,7,&#39;dl&#39;,this)">15/06/2026</div>
+        </td>
+        <td><select class="status-select ss-overdue" onchange="changeStatus(&#39;g3&#39;,7,this.value)"><option value="overdue" selected="">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g3&#39;,7)">✕</button></td>
+      </tr></tbody></table></div></div><div class="group">
+      <div class="group-header"><span>IV. Triển khai phần mềm &amp; Go-live</span><span class="group-count">6 việc</span></div>
+      <div class="group-body"><table>
+        <thead><tr>
+          <th>STT</th><th class="col-nd">Nội dung công việc</th><th class="col-dm">Đầu mối</th>
+          <th class="col-cb">Thực hiện</th><th class="col-dl">Deadline</th><th class="col-st">Trạng thái</th><th class="col-act"></th>
+        </tr></thead><tbody><tr>
+        <td>20</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g4&#39;,0,&#39;nd&#39;,this)">Triển khai Module Kho, TSCĐ, CCDC, Mua hàng</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g4&#39;,0,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g4&#39;,0,&#39;dm&#39;,this)">Loan</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g4&#39;,0,&#39;cb&#39;,this)">Anh Cường + đội mua hàng</div>
+        </td>
+        <td>
+          <div class="td-dl dl-active editable" onclick="startEdit(&#39;g4&#39;,0,&#39;dl&#39;,this)">01/07/2026</div>
+        </td>
+        <td><select class="status-select ss-active" onchange="changeStatus(&#39;g4&#39;,0,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active" selected="">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g4&#39;,0)">✕</button></td>
+      </tr><tr>
+        <td>21</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g4&#39;,1,&#39;nd&#39;,this)">Triển khai module Bán hàng (tích hợp phần mềm)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g4&#39;,1,&#39;note&#39;,this)">Báo cáo lại chi tiết khi thực hiện</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g4&#39;,1,&#39;dm&#39;,this)">Thủy</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g4&#39;,1,&#39;cb&#39;,this)">Chị Loan + Anh Cường</div>
+        </td>
+        <td>
+          <div class="td-dl dl-active editable" onclick="startEdit(&#39;g4&#39;,1,&#39;dl&#39;,this)">15/07/2026</div>
+        </td>
+        <td><select class="status-select ss-active" onchange="changeStatus(&#39;g4&#39;,1,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active" selected="">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g4&#39;,1)">✕</button></td>
+      </tr><tr>
+        <td>22</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g4&#39;,2,&#39;nd&#39;,this)">Triển khai module Kế toán</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g4&#39;,2,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g4&#39;,2,&#39;dm&#39;,this)">Thủy</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g4&#39;,2,&#39;cb&#39;,this)">Chị Hiền kết hợp</div>
+        </td>
+        <td>
+          <div class="td-dl dl-active editable" onclick="startEdit(&#39;g4&#39;,2,&#39;dl&#39;,this)">01/08/2026</div>
+        </td>
+        <td><select class="status-select ss-active" onchange="changeStatus(&#39;g4&#39;,2,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active" selected="">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g4&#39;,2)">✕</button></td>
+      </tr><tr>
+        <td>23</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g4&#39;,3,&#39;nd&#39;,this)">Chốt số dư đầu kỳ (SDĐK)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g4&#39;,3,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g4&#39;,3,&#39;dm&#39;,this)">Bà Hiền (KTT), Bà Thủy, Ông Bá Anh</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g4&#39;,3,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-active editable" onclick="startEdit(&#39;g4&#39;,3,&#39;dl&#39;,this)">26/07/2026</div>
+        </td>
+        <td><select class="status-select ss-active" onchange="changeStatus(&#39;g4&#39;,3,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active" selected="">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g4&#39;,3)">✕</button></td>
+      </tr><tr>
+        <td>24</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g4&#39;,4,&#39;nd&#39;,this)">Xây dựng định mức suất ăn (song song Kế toán – Bếp)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g4&#39;,4,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g4&#39;,4,&#39;dm&#39;,this)">Ông Cường + team CVL, Ông Huy</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g4&#39;,4,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-active editable" onclick="startEdit(&#39;g4&#39;,4,&#39;dl&#39;,this)">31/07/2026</div>
+        </td>
+        <td><select class="status-select ss-active" onchange="changeStatus(&#39;g4&#39;,4,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active" selected="">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g4&#39;,4)">✕</button></td>
+      </tr><tr>
+        <td>25</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g4&#39;,5,&#39;nd&#39;,this)">Đào tạo người dùng theo từng nghiệp vụ trước Go-live</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g4&#39;,5,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g4&#39;,5,&#39;dm&#39;,this)">Ban ĐH dự án</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g4&#39;,5,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-active editable" onclick="startEdit(&#39;g4&#39;,5,&#39;dl&#39;,this)">Trước 01/08</div>
+        </td>
+        <td><select class="status-select ss-active" onchange="changeStatus(&#39;g4&#39;,5,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active" selected="">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g4&#39;,5)">✕</button></td>
+      </tr><tr class="milestone-row"><td colspan="7"><span class="milestone-text">⚑ GO-LIVE KẾ TOÁN — 01/08/2026</span></td></tr><tr class="milestone-row"><td colspan="7"><span class="milestone-text">⚑ GO-LIVE KHO / TSCĐ / CCDC — 10/08/2026</span></td></tr></tbody></table></div></div><div class="group">
+      <div class="group-header"><span>V. Nhân sự, KPI &amp; vận hành</span><span class="group-count">2 việc</span></div>
+      <div class="group-body"><table>
+        <thead><tr>
+          <th>STT</th><th class="col-nd">Nội dung công việc</th><th class="col-dm">Đầu mối</th>
+          <th class="col-cb">Thực hiện</th><th class="col-dl">Deadline</th><th class="col-st">Trạng thái</th><th class="col-act"></th>
+        </tr></thead><tbody><tr>
+        <td>26</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g5&#39;,0,&#39;nd&#39;,this)">Đào tạo, setup lại phòng kế toán (soạn bài giảng, set up lại phòng kế toán)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g5&#39;,0,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g5&#39;,0,&#39;dm&#39;,this)">Hoàng Anh</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g5&#39;,0,&#39;cb&#39;,this)">Chị Hiền kết hợp</div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g5&#39;,0,&#39;dl&#39;,this)">15/09/2026</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g5&#39;,0,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g5&#39;,0)">✕</button></td>
+      </tr><tr>
+        <td>27</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g5&#39;,1,&#39;nd&#39;,this)">Xây dựng bảng lương và các quy chế bán hàng</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g5&#39;,1,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g5&#39;,1,&#39;dm&#39;,this)">Loan</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g5&#39;,1,&#39;cb&#39;,this)">Anh Cường, Huy, 1 bạn NS hỗ trợ</div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g5&#39;,1,&#39;dl&#39;,this)">31/01/2027</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g5&#39;,1,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g5&#39;,1)">✕</button></td>
+      </tr></tbody></table></div></div><div class="group">
+      <div class="group-header"><span>VI. Báo cáo, tích hợp &amp; số hóa toàn diện</span><span class="group-count">6 việc</span></div>
+      <div class="group-body"><table>
+        <thead><tr>
+          <th>STT</th><th class="col-nd">Nội dung công việc</th><th class="col-dm">Đầu mối</th>
+          <th class="col-cb">Thực hiện</th><th class="col-dl">Deadline</th><th class="col-st">Trạng thái</th><th class="col-act"></th>
+        </tr></thead><tbody><tr>
+        <td>28</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g6&#39;,0,&#39;nd&#39;,this)">Số hoá các báo cáo quản trị</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g6&#39;,0,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g6&#39;,0,&#39;dm&#39;,this)">Huy</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g6&#39;,0,&#39;cb&#39;,this)">Anh Cường + Sơn kết hợp</div>
+        </td>
+        <td>
+          <div class="td-dl dl-active editable" onclick="startEdit(&#39;g6&#39;,0,&#39;dl&#39;,this)">01/08/2026</div>
+        </td>
+        <td><select class="status-select ss-active" onchange="changeStatus(&#39;g6&#39;,0,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active" selected="">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g6&#39;,0)">✕</button></td>
+      </tr><tr>
+        <td>29</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g6&#39;,1,&#39;nd&#39;,this)">Xây dựng báo cáo hợp nhất và hướng dẫn thực hiện, số hoá</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g6&#39;,1,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g6&#39;,1,&#39;dm&#39;,this)">Huy</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g6&#39;,1,&#39;cb&#39;,this)">Anh Cường, Sơn kết hợp</div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g6&#39;,1,&#39;dl&#39;,this)">15/02/2027</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g6&#39;,1,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g6&#39;,1)">✕</button></td>
+      </tr><tr>
+        <td>30</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g6&#39;,2,&#39;nd&#39;,this)">Hợp nhất CRM đa kênh (Hotline, Facebook, Zalo, TikTok) về một hệ thống</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g6&#39;,2,&#39;note&#39;,this)">262K thành viên, chưa theo dõi vãng lai</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g6&#39;,2,&#39;dm&#39;,this)">Bà Quỳnh (MKT)</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g6&#39;,2,&#39;cb&#39;,this)">Bà Loan phối hợp</div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g6&#39;,2,&#39;dl&#39;,this)">Sau chọn PM</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g6&#39;,2,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g6&#39;,2)">✕</button></td>
+      </tr><tr>
+        <td>31</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g6&#39;,3,&#39;nd&#39;,this)">Thiết lập theo dõi hành trình khách hàng đầy đủ</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g6&#39;,3,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g6&#39;,3,&#39;dm&#39;,this)">Bà Quỳnh (MKT)</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g6&#39;,3,&#39;cb&#39;,this)">Bà Loan phối hợp</div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g6&#39;,3,&#39;dl&#39;,this)">Sau chọn PM</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g6&#39;,3,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g6&#39;,3)">✕</button></td>
+      </tr><tr>
+        <td>32</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g6&#39;,4,&#39;nd&#39;,this)">Đo lường hiệu quả chiến dịch Marketing theo từng kênh</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g6&#39;,4,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g6&#39;,4,&#39;dm&#39;,this)">Bà Quỳnh (MKT)</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g6&#39;,4,&#39;cb&#39;,this)">Anh Cường, Sơn kết hợp</div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g6&#39;,4,&#39;dl&#39;,this)">Sau chọn PM</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g6&#39;,4,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g6&#39;,4)">✕</button></td>
+      </tr><tr>
+        <td>33</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g6&#39;,5,&#39;nd&#39;,this)">Tích hợp và đồng bộ dữ liệu toàn hệ thống</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g6&#39;,5,&#39;note&#39;,this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g6&#39;,5,&#39;dm&#39;,this)">Hải</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g6&#39;,5,&#39;cb&#39;,this)">Huy, Sơn kết hợp</div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g6&#39;,5,&#39;dl&#39;,this)">31/03/2027</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g6&#39;,5,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g6&#39;,5)">✕</button></td>
+      </tr></tbody></table></div></div><div class="group">
+      <div class="group-header"><span>VII. CNTT — Tích hợp hệ thống</span><span class="group-count">3 việc</span></div>
+      <div class="group-body"><table>
+        <thead><tr>
+          <th>STT</th><th class="col-nd">Nội dung công việc</th><th class="col-dm">Đầu mối</th>
+          <th class="col-cb">Thực hiện</th><th class="col-dl">Deadline</th><th class="col-st">Trạng thái</th><th class="col-act"></th>
+        </tr></thead><tbody><tr>
+        <td>34</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g7&#39;,0,&#39;nd&#39;,this)">Đánh giá các hệ thống hiện tại của DN (POS, kế toán, kho, CRM)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g7&#39;,0,&#39;note&#39;,this)">II.1.1 — Ưu tiên cao, nền tảng cho toàn bộ GĐ2</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g7&#39;,0,&#39;dm&#39;,this)">Mr.Hải</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g7&#39;,0,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-urgent editable" onclick="startEdit(&#39;g7&#39;,0,&#39;dl&#39;,this)">19/06/2026</div>
+        </td>
+        <td><select class="status-select ss-urgent" onchange="changeStatus(&#39;g7&#39;,0,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent" selected="">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g7&#39;,0)">✕</button></td>
+      </tr><tr>
+        <td>35</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g7&#39;,1,&#39;nd&#39;,this)">Kết nối đồng bộ Real-time POS – HTK – Kế toán (API/middleware)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g7&#39;,1,&#39;note&#39;,this)">II.1.2 — Phụ thuộc II.1.1, có thể song song giai đoạn đánh giá</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g7&#39;,1,&#39;dm&#39;,this)">Mr.Hải</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g7&#39;,1,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-active editable" onclick="startEdit(&#39;g7&#39;,1,&#39;dl&#39;,this)">31/07/2026</div>
+        </td>
+        <td><select class="status-select ss-active" onchange="changeStatus(&#39;g7&#39;,1,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active" selected="">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g7&#39;,1)">✕</button></td>
+      </tr><tr>
+        <td>36</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g7&#39;,2,&#39;nd&#39;,this)">Sơ đồ phần mềm hiện tại của CVL (tổng quan hóa toàn bộ PM đang dùng)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g7&#39;,2,&#39;note&#39;,this)">II.1.3</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g7&#39;,2,&#39;dm&#39;,this)">Mr.Hải</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g7&#39;,2,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-urgent editable" onclick="startEdit(&#39;g7&#39;,2,&#39;dl&#39;,this)">22/06/2026</div>
+        </td>
+        <td><select class="status-select ss-urgent" onchange="changeStatus(&#39;g7&#39;,2,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent" selected="">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g7&#39;,2)">✕</button></td>
+      </tr></tbody></table></div></div><div class="group">
+      <div class="group-header"><span>VIII. CNTT — Tái cấu trúc PM Bán hàng</span><span class="group-count">7 việc</span></div>
+      <div class="group-body"><table>
+        <thead><tr>
+          <th>STT</th><th class="col-nd">Nội dung công việc</th><th class="col-dm">Đầu mối</th>
+          <th class="col-cb">Thực hiện</th><th class="col-dl">Deadline</th><th class="col-st">Trạng thái</th><th class="col-act"></th>
+        </tr></thead><tbody><tr>
+        <td>37</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g8&#39;,0,&#39;nd&#39;,this)">Đánh giá phần mềm Bán hàng (POS hiện tại: tính năng, hiệu suất, bảo mật)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g8&#39;,0,&#39;note&#39;,this)">II.2.1 — Song song với II.1.2</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g8&#39;,0,&#39;dm&#39;,this)">Mr.Hải</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g8&#39;,0,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-urgent editable" onclick="startEdit(&#39;g8&#39;,0,&#39;dl&#39;,this)">19/06/2026</div>
+        </td>
+        <td><select class="status-select ss-urgent" onchange="changeStatus(&#39;g8&#39;,0,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent" selected="">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g8&#39;,0)">✕</button></td>
+      </tr><tr>
+        <td>38</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g8&#39;,1,&#39;nd&#39;,this)">Tư vấn điều chỉnh PM Bán hàng (nâng cấp / tích hợp / chuyển đổi mới)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g8&#39;,1,&#39;note&#39;,this)">II.2.2 — Phụ thuộc II.2.1</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g8&#39;,1,&#39;dm&#39;,this)">Mr.Hải</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g8&#39;,1,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-active editable" onclick="startEdit(&#39;g8&#39;,1,&#39;dl&#39;,this)">19/06/2026</div>
+        </td>
+        <td><select class="status-select ss-active" onchange="changeStatus(&#39;g8&#39;,1,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active" selected="">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g8&#39;,1)">✕</button></td>
+      </tr><tr>
+        <td>39</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g8&#39;,2,&#39;nd&#39;,this)">Mô tả PM Bán hàng phù hợp cấu trúc mới (BRD/FRD)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g8&#39;,2,&#39;note&#39;,this)">II.2.3 — Song song với II.2.2</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g8&#39;,2,&#39;dm&#39;,this)">Mr.Hải</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g8&#39;,2,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g8&#39;,2,&#39;dl&#39;,this)">25/06/2026</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g8&#39;,2,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g8&#39;,2)">✕</button></td>
+      </tr><tr>
+        <td>40</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g8&#39;,3,&#39;nd&#39;,this)">Xây dựng phương án chuyển đổi PM Bán hàng (migration, UAT, rollback)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g8&#39;,3,&#39;note&#39;,this)">II.2.4 — Giai đoạn dài, báo cáo tiến độ 2 tuần/lần</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g8&#39;,3,&#39;dm&#39;,this)">Mr.Hải</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g8&#39;,3,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g8&#39;,3,&#39;dl&#39;,this)">31/07/2026</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g8&#39;,3,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g8&#39;,3)">✕</button></td>
+      </tr><tr>
+        <td>41</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g8&#39;,4,&#39;nd&#39;,this)">Đào tạo người dùng PM Bán hàng mới</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g8&#39;,4,&#39;note&#39;,this)">II.2.5 — Sau khi PM cấu hình xong &amp; UAT pass</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g8&#39;,4,&#39;dm&#39;,this)">Ms.Dương</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g8&#39;,4,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g8&#39;,4,&#39;dl&#39;,this)">05/08/2026</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g8&#39;,4,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g8&#39;,4)">✕</button></td>
+      </tr><tr>
+        <td>42</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g8&#39;,5,&#39;nd&#39;,this)">Go-live PM Bán hàng (parallel run 2 tuần → chuyển hoàn toàn)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g8&#39;,5,&#39;note&#39;,this)">II.2.6 — Tránh go-live ngày lễ Tết</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g8&#39;,5,&#39;dm&#39;,this)">Mr.Hải</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g8&#39;,5,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g8&#39;,5,&#39;dl&#39;,this)">Sau UAT</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g8&#39;,5,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g8&#39;,5)">✕</button></td>
+      </tr><tr>
+        <td>43</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g8&#39;,6,&#39;nd&#39;,this)">Nghiệm thu, hoàn thành dự án PM Bán hàng</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g8&#39;,6,&#39;note&#39;,this)">II.2.7 — Bao gồm hỗ trợ sau go-live</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g8&#39;,6,&#39;dm&#39;,this)">Mr.Hải, Ms.Dương</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g8&#39;,6,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g8&#39;,6,&#39;dl&#39;,this)">10/08/2026</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g8&#39;,6,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g8&#39;,6)">✕</button></td>
+      </tr><tr class="milestone-row"><td colspan="7"><span class="milestone-text">⚑ GO-LIVE PM BÁN HÀNG — Sau UAT Pass</span></td></tr></tbody></table></div></div><div class="group">
+      <div class="group-header"><span>IX. CNTT — Tái cấu trúc PM Kế toán &amp; Kho</span><span class="group-count">12 việc</span></div>
+      <div class="group-body"><table>
+        <thead><tr>
+          <th>STT</th><th class="col-nd">Nội dung công việc</th><th class="col-dm">Đầu mối</th>
+          <th class="col-cb">Thực hiện</th><th class="col-dl">Deadline</th><th class="col-st">Trạng thái</th><th class="col-act"></th>
+        </tr></thead><tbody><tr>
+        <td>44</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g9&#39;,0,&#39;nd&#39;,this)">Thực hiện bài thầu PM kế toán (soạn RFP chi tiết)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g9&#39;,0,&#39;note&#39;,this)">II.3.1 — Bắt đầu song song khi có kết quả đánh giá</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g9&#39;,0,&#39;dm&#39;,this)">Ms.Dương, Mr.Hải</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g9&#39;,0,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-urgent editable" onclick="startEdit(&#39;g9&#39;,0,&#39;dl&#39;,this)">26/06/2026</div>
+        </td>
+        <td><select class="status-select ss-urgent" onchange="changeStatus(&#39;g9&#39;,0,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent" selected="">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g9&#39;,0)">✕</button></td>
+      </tr><tr>
+        <td>45</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g9&#39;,1,&#39;nd&#39;,this)">Phê duyệt bài thầu (trình BGĐ phê duyệt RFP)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g9&#39;,1,&#39;note&#39;,this)">II.3.2 — Cần BGĐ duyệt</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g9&#39;,1,&#39;dm&#39;,this)">Ms.Loan, Mr.Cường</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g9&#39;,1,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g9&#39;,1,&#39;dl&#39;,this)">14/08/2026</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g9&#39;,1,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g9&#39;,1)">✕</button></td>
+      </tr><tr>
+        <td>46</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g9&#39;,2,&#39;nd&#39;,this)">Gọi nhà thầu đánh giá tư vấn giải pháp (gửi RFP cho 3-5 NCC, tổ chức demo)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g9&#39;,2,&#39;note&#39;,this)">II.3.3 — Mời tối thiểu 3 nhà thầu</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g9&#39;,2,&#39;dm&#39;,this)">Ms.Dương</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g9&#39;,2,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g9&#39;,2,&#39;dl&#39;,this)">28/08/2026</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g9&#39;,2,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g9&#39;,2)">✕</button></td>
+      </tr><tr>
+        <td>47</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g9&#39;,3,&#39;nd&#39;,this)">Thống nhất giải pháp (so sánh, thương thảo hợp đồng, chốt scope &amp; timeline)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g9&#39;,3,&#39;note&#39;,this)">II.3.4</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g9&#39;,3,&#39;dm&#39;,this)">Ms.Dương</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g9&#39;,3,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g9&#39;,3,&#39;dl&#39;,this)">11/09/2026</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g9&#39;,3,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g9&#39;,3)">✕</button></td>
+      </tr><tr>
+        <td>48</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g9&#39;,4,&#39;nd&#39;,this)">Lựa chọn nhà thầu &amp; ký hợp đồng triển khai</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g9&#39;,4,&#39;note&#39;,this)">II.3.5 — Cần BGĐ duyệt</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g9&#39;,4,&#39;dm&#39;,this)">Mr.Cường</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g9&#39;,4,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g9&#39;,4,&#39;dl&#39;,this)">18/09/2026</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g9&#39;,4,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g9&#39;,4)">✕</button></td>
+      </tr><tr>
+        <td>49</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g9&#39;,5,&#39;nd&#39;,this)">Chuẩn bị platform CNTT (server, network, bảo mật, dev/staging/prod)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g9&#39;,5,&#39;note&#39;,this)">II.3.6 — Nhóm CNTT nội bộ thực hiện</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g9&#39;,5,&#39;dm&#39;,this)">Mr.Hải</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g9&#39;,5,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g9&#39;,5,&#39;dl&#39;,this)">09/10/2026</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g9&#39;,5,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g9&#39;,5)">✕</button></td>
+      </tr><tr>
+        <td>50</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g9&#39;,6,&#39;nd&#39;,this)">Setup tài khoản, module quản trị (COA, cost center, phân quyền, workflow)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g9&#39;,6,&#39;note&#39;,this)">II.3.7 — Song song II.3.6, cần input từ GĐ1</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g9&#39;,6,&#39;dm&#39;,this)">Mr.Huy, Mr.Sơn</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g9&#39;,6,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g9&#39;,6,&#39;dl&#39;,this)">16/10/2026</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g9&#39;,6,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g9&#39;,6)">✕</button></td>
+      </tr><tr>
+        <td>51</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g9&#39;,7,&#39;nd&#39;,this)">Đối tác viết PM mảng tài chính (GL, AP, AR, FA)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g9&#39;,7,&#39;note&#39;,this)">II.3.8 — Đối tác chủ trì, CNTT giám sát &amp; test</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g9&#39;,7,&#39;dm&#39;,this)">Đối tác</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g9&#39;,7,&#39;cb&#39;,this)">Mr.Hải giám sát</div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g9&#39;,7,&#39;dl&#39;,this)">04/12/2026</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g9&#39;,7,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g9&#39;,7)">✕</button></td>
+      </tr><tr>
+        <td>52</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g9&#39;,8,&#39;nd&#39;,this)">Tích hợp dữ liệu (interface PM kế toán ↔ POS, kho, ngân hàng)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g9&#39;,8,&#39;note&#39;,this)">II.3.9 — Phụ thuộc II.3.8 và II.1.2</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g9&#39;,8,&#39;dm&#39;,this)">Đối tác</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g9&#39;,8,&#39;cb&#39;,this)">Mr.Hải giám sát</div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g9&#39;,8,&#39;dl&#39;,this)">31/12/2026</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g9&#39;,8,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g9&#39;,8)">✕</button></td>
+      </tr><tr>
+        <td>53</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g9&#39;,9,&#39;nd&#39;,this)">Đối tác viết PM mảng quản trị (dashboard, BI)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g9&#39;,9,&#39;note&#39;,this)">II.3.10 — Song song với II.3.8</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g9&#39;,9,&#39;dm&#39;,this)">Đối tác</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g9&#39;,9,&#39;cb&#39;,this)">Mr.Hải giám sát</div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g9&#39;,9,&#39;dl&#39;,this)">04/12/2026</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g9&#39;,9,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g9&#39;,9)">✕</button></td>
+      </tr><tr>
+        <td>54</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g9&#39;,10,&#39;nd&#39;,this)">Chuyển đổi dữ liệu, nhập đuổi PM mới (migration từ FAST, parallel run)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g9&#39;,10,&#39;note&#39;,this)">II.3.11 — Sau khi tất cả module hoàn thành</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g9&#39;,10,&#39;dm&#39;,this)">Team CVL</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g9&#39;,10,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g9&#39;,10,&#39;dl&#39;,this)">30/01/2027</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g9&#39;,10,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g9&#39;,10)">✕</button></td>
+      </tr><tr>
+        <td>55</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g9&#39;,11,&#39;nd&#39;,this)">Đẩy dữ liệu quản trị lên để nghiệm thu (đối soát báo cáo cũ vs mới)</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g9&#39;,11,&#39;note&#39;,this)">II.3.12 — Nghiệm thu toàn bộ</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g9&#39;,11,&#39;dm&#39;,this)">Team CVL</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g9&#39;,11,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g9&#39;,11,&#39;dl&#39;,this)">27/02/2027</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g9&#39;,11,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g9&#39;,11)">✕</button></td>
+      </tr><tr class="milestone-row"><td colspan="7"><span class="milestone-text">⚑ GO-LIVE PM KẾ TOÁN &amp; KHO MỚI — Q1/2027</span></td></tr></tbody></table></div></div><div class="group">
+      <div class="group-header"><span>X. CNTT — Kế toán hợp nhất (Optional — nếu mô hình Mẹ-Con)</span><span class="group-count">4 việc</span></div>
+      <div class="group-body"><table>
+        <thead><tr>
+          <th>STT</th><th class="col-nd">Nội dung công việc</th><th class="col-dm">Đầu mối</th>
+          <th class="col-cb">Thực hiện</th><th class="col-dl">Deadline</th><th class="col-st">Trạng thái</th><th class="col-act"></th>
+        </tr></thead><tbody><tr>
+        <td>56</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g10&#39;,0,&#39;nd&#39;,this)">Chuyển đổi số dư sang hệ thống hợp nhất</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g10&#39;,0,&#39;note&#39;,this)">II.4.1 — Optional, chỉ thực hiện nếu có mô hình Mẹ-Con</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g10&#39;,0,&#39;dm&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ đầu mối</span></div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g10&#39;,0,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g10&#39;,0,&#39;dl&#39;,this)">20/03/2027</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g10&#39;,0,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g10&#39;,0)">✕</button></td>
+      </tr><tr>
+        <td>57</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g10&#39;,1,&#39;nd&#39;,this)">Hướng dẫn nghiệp vụ kế toán hợp nhất cho nhân sự</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g10&#39;,1,&#39;note&#39;,this)">II.4.2 — Optional</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g10&#39;,1,&#39;dm&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ đầu mối</span></div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g10&#39;,1,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g10&#39;,1,&#39;dl&#39;,this)">03/04/2027</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g10&#39;,1,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g10&#39;,1)">✕</button></td>
+      </tr><tr>
+        <td>58</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g10&#39;,2,&#39;nd&#39;,this)">Hoàn thành báo cáo tài chính hợp nhất</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g10&#39;,2,&#39;note&#39;,this)">II.4.3 — Optional</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g10&#39;,2,&#39;dm&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ đầu mối</span></div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g10&#39;,2,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g10&#39;,2,&#39;dl&#39;,this)">17/04/2027</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g10&#39;,2,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g10&#39;,2)">✕</button></td>
+      </tr><tr>
+        <td>59</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit(&#39;g10&#39;,3,&#39;nd&#39;,this)">Đề xuất giải pháp PM hợp nhất tự động</div>
+          <div class="td-note editable" onclick="startEdit(&#39;g10&#39;,3,&#39;note&#39;,this)">II.4.4 — Optional</div>
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit(&#39;g10&#39;,3,&#39;dm&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ đầu mối</span></div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit(&#39;g10&#39;,3,&#39;cb&#39;,this)"><span style="color:#cbd5e1;font-style:italic">+ thực hiện</span></div>
+        </td>
+        <td>
+          <div class="td-dl dl-soon editable" onclick="startEdit(&#39;g10&#39;,3,&#39;dl&#39;,this)">30/04/2027</div>
+        </td>
+        <td><select class="status-select ss-soon" onchange="changeStatus(&#39;g10&#39;,3,this.value)"><option value="overdue">⚠ Quá hạn</option><option value="urgent">⚡ Cấp bách</option><option value="active">▶ Đang thực hiện</option><option value="soon" selected="">◇ Sắp tới</option><option value="done">✓ Hoàn thành</option></select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask(&#39;g10&#39;,3)">✕</button></td>
+      </tr></tbody></table></div></div></div>
+
+  <div class="footer">Kế hoạch công việc CVL 2026 · Cập nhật <span id="updateDate">22/6/2026</span></div>
+</div>
+
+<script>
+const GROUPS = [
+  {id:"g1",label:"I. Đánh giá & quyết định phần mềm",rows:[
+    {s:1,nd:"Làm việc với MISA, FAST và Bravo",dm:"Loan",cb:"GĐ Cường, CFO Cường, Nhân",dl:"15/06/2026",st:"urgent",note:"Chưa làm việc với Bravo"},
+    {s:2,nd:"Lập file checklist mô tả ứng dụng cụ thể từng module theo từng phần mềm cho từng phòng ban",dm:"Ban ĐH dự án",cb:"Tất cả phòng ban",dl:"Trước 21/06",st:"urgent",note:"Gửi để bộ phận tự đánh giá"},
+    {s:3,nd:"Các phòng ban nghiên cứu, đánh giá từng chức năng phần mềm theo nghiệp vụ thực tế",dm:"Tất cả PB",cb:"Ban ĐH theo dõi",dl:"Trước 21/06",st:"urgent",note:"Xác định: đáp ứng / còn thiếu / cần tùy chỉnh"},
+    {s:4,nd:"Yêu cầu Bravo làm rõ: tích hợp API với POS, AI/trợ lý ảo, khả năng đáp ứng đặc thù CVL",dm:"Ông Cường, Bà Loan",cb:"Đại diện Bravo",dl:"Trước 21/06",st:"urgent",note:""},
+    {s:5,nd:"Yêu cầu MISA làm rõ: CRM chuyên sâu nhà hàng, chấm công đa cơ sở, hành trình khách hàng",dm:"Bà Loan, Bà Hằng, Bà Quỳnh",cb:"Đại diện MISA",dl:"Trước 21/06",st:"urgent",note:"262K thành viên, hợp nhất đa kênh"},
+    {s:6,nd:"Ký hợp đồng với đơn vị phần mềm được chọn",dm:"Anh Cường",cb:"",dl:"20/06/2026",st:"urgent",note:""},
+    {s:7,nd:"Chốt lựa chọn phần mềm cuối cùng (MISA hoặc Bravo)",dm:"Ông Cường, Bà Loan",cb:"",dl:"21/06/2026",st:"urgent",note:"Dựa trên nhu cầu thực tế"},
+  ]},
+  {id:"g2",label:"II. Xây dựng quy trình & số hóa",rows:[
+    {s:8,nd:"Mô tả nghiệp vụ Bán hàng, nghiệp vụ Kho và đưa ra phương án cải tiến",dm:"Loan",cb:"Thủy, Anh Cường",dl:"20/05/2026",st:"done",note:"Đã hoàn thành"},
+    {s:9,nd:"Chốt quy trình đề xuất mô hình BH-DT",dm:"Ông Cường, team CVL, Bà Thủy",cb:"",dl:"09/06/2026",st:"overdue",note:"Họp chốt Thứ 3 – 09/06"},
+    {s:10,nd:"Xây dựng bộ quy trình mua sắm, nhập kho, điều chuyển, trả lại...",dm:"Bà Thủy",cb:"Bà Hoàng Anh thiết lập",dl:"25/06/2026",st:"active",note:""},
+    {s:11,nd:"Viết quy trình để số hoá lên phần mềm",dm:"Thủy",cb:"Hoàng Anh kết hợp",dl:"25/06/2026",st:"active",note:""},
+    {s:12,nd:"Nghiên cứu bố trí lại kho khoa học – chuẩn bị cân, thùng, Layout A1-B1-C1",dm:"Ông Cường + team CVL",cb:"",dl:"30/06/2026",st:"active",note:""},
+  ]},
+  {id:"g3",label:"III. Kiểm kê tài sản & chuẩn hóa dữ liệu",rows:[
+    {s:13,nd:"Tổ chức kiểm kê TSCĐ, CCDC, Nguyên vật liệu – đồng nhất mã, làm sạch dữ liệu",dm:"Anh Cường (CFO)",cb:"Thủy kết hợp",dl:"10/06/2026",st:"overdue",note:"Ra báo cáo và hướng xử lý"},
+    {s:14,nd:"Chốt bộ mã TSCĐ – CCDC, Nguyên vật liệu (đồng nhất mã toàn hệ thống)",dm:"Bà Loan",cb:"",dl:"Sau kiểm kê",st:"active",note:""},
+    {s:15,nd:"Rà soát tài sản, công nợ, hồ sơ pháp lý các công ty cũ",dm:"Bà Loan",cb:"Liên quan",dl:"Theo tiến độ",st:"active",note:"Ưu tiên sáp nhập thay giải thể"},
+    {s:16,nd:"Rà soát đưa dữ liệu đầu kỳ lên; dự kiến Go-live 01/07 phần mềm Kế toán và Kho",dm:"Thủy",cb:"Anh Cường kết hợp",dl:"15/06/2026",st:"urgent",note:"Thủy báo cáo chi tiết"},
+    {s:17,nd:"Lên các báo cáo quản trị mẫu bằng Excel để thực hiện công tác số hoá",dm:"Huy",cb:"Anh Cường kết hợp",dl:"30/06/2026",st:"active",note:"Huy báo cáo chi tiết"},
+    {s:18,nd:"Lên bài thầu toàn bộ các hạng mục",dm:"Dương",cb:"",dl:"15/06/2026",st:"urgent",note:""},
+    {s:19,nd:"Thẩm định lại toàn bộ số liệu để soát vốn lên holding",dm:"Thủy",cb:"Anh Cường, Chị Hiền kết hợp",dl:"30/08/2026",st:"soon",note:""},
+  ]},
+  {id:"g4",label:"IV. Triển khai phần mềm & Go-live",rows:[
+    {s:20,nd:"Triển khai Module Kho, TSCĐ, CCDC, Mua hàng",dm:"Loan",cb:"Anh Cường + đội mua hàng",dl:"01/07/2026",st:"active",note:""},
+    {s:21,nd:"Triển khai module Bán hàng (tích hợp phần mềm)",dm:"Thủy",cb:"Chị Loan + Anh Cường",dl:"15/07/2026",st:"active",note:"Báo cáo lại chi tiết khi thực hiện"},
+    {s:22,nd:"Triển khai module Kế toán",dm:"Thủy",cb:"Chị Hiền kết hợp",dl:"01/08/2026",st:"active",note:""},
+    {s:23,nd:"Chốt số dư đầu kỳ (SDĐK)",dm:"Bà Hiền (KTT), Bà Thủy, Ông Bá Anh",cb:"",dl:"26/07/2026",st:"active",note:""},
+    {s:24,nd:"Xây dựng định mức suất ăn (song song Kế toán – Bếp)",dm:"Ông Cường + team CVL, Ông Huy",cb:"",dl:"31/07/2026",st:"active",note:""},
+    {s:25,nd:"Đào tạo người dùng theo từng nghiệp vụ trước Go-live",dm:"Ban ĐH dự án",cb:"",dl:"Trước 01/08",st:"active",note:""},
+    {s:"M1",nd:"GO-LIVE KẾ TOÁN",dm:"",cb:"",dl:"01/08/2026",st:"milestone",note:""},
+    {s:"M2",nd:"GO-LIVE KHO / TSCĐ / CCDC",dm:"",cb:"",dl:"10/08/2026",st:"milestone",note:""},
+  ]},
+  {id:"g5",label:"V. Nhân sự, KPI & vận hành",rows:[
+    {s:26,nd:"Đào tạo, setup lại phòng kế toán (soạn bài giảng, set up lại phòng kế toán)",dm:"Hoàng Anh",cb:"Chị Hiền kết hợp",dl:"15/09/2026",st:"soon",note:""},
+    {s:27,nd:"Xây dựng bảng lương và các quy chế bán hàng",dm:"Loan",cb:"Anh Cường, Huy, 1 bạn NS hỗ trợ",dl:"31/01/2027",st:"soon",note:""},
+  ]},
+  {id:"g6",label:"VI. Báo cáo, tích hợp & số hóa toàn diện",rows:[
+    {s:28,nd:"Số hoá các báo cáo quản trị",dm:"Huy",cb:"Anh Cường + Sơn kết hợp",dl:"01/08/2026",st:"active",note:""},
+    {s:29,nd:"Xây dựng báo cáo hợp nhất và hướng dẫn thực hiện, số hoá",dm:"Huy",cb:"Anh Cường, Sơn kết hợp",dl:"15/02/2027",st:"soon",note:""},
+    {s:30,nd:"Hợp nhất CRM đa kênh (Hotline, Facebook, Zalo, TikTok) về một hệ thống",dm:"Bà Quỳnh (MKT)",cb:"Bà Loan phối hợp",dl:"Sau chọn PM",st:"soon",note:"262K thành viên, chưa theo dõi vãng lai"},
+    {s:31,nd:"Thiết lập theo dõi hành trình khách hàng đầy đủ",dm:"Bà Quỳnh (MKT)",cb:"Bà Loan phối hợp",dl:"Sau chọn PM",st:"soon",note:""},
+    {s:32,nd:"Đo lường hiệu quả chiến dịch Marketing theo từng kênh",dm:"Bà Quỳnh (MKT)",cb:"Anh Cường, Sơn kết hợp",dl:"Sau chọn PM",st:"soon",note:""},
+    {s:33,nd:"Tích hợp và đồng bộ dữ liệu toàn hệ thống",dm:"Hải",cb:"Huy, Sơn kết hợp",dl:"31/03/2027",st:"soon",note:""},
+  ]},
+  {id:"g7",label:"VII. CNTT — Tích hợp hệ thống",rows:[
+    {s:34,nd:"Đánh giá các hệ thống hiện tại của DN (POS, kế toán, kho, CRM)",dm:"Mr.Hải",cb:"",dl:"26/06/2026",st:"urgent",note:"II.1.1 — Ưu tiên cao, nền tảng cho toàn bộ GĐ2"},
+    {s:35,nd:"Kết nối đồng bộ Real-time POS – HTK – Kế toán (API/middleware)",dm:"Mr.Hải",cb:"",dl:"31/07/2026",st:"active",note:"II.1.2 — Phụ thuộc II.1.1, có thể song song giai đoạn đánh giá"},
+    {s:36,nd:"Sơ đồ phần mềm hiện tại của CVL (tổng quan hóa toàn bộ PM đang dùng)",dm:"Mr.Hải",cb:"",dl:"26/06/2026",st:"urgent",note:"II.1.3"},
+  ]},
+  {id:"g8",label:"VIII. CNTT — Tái cấu trúc PM Bán hàng",rows:[
+    {s:37,nd:"Đánh giá phần mềm Bán hàng (POS hiện tại: tính năng, hiệu suất, bảo mật)",dm:"Mr.Hải",cb:"",dl:"26/06/2026",st:"urgent",note:"II.2.1 — Song song với II.1.2"},
+    {s:38,nd:"Tư vấn điều chỉnh PM Bán hàng (nâng cấp / tích hợp / chuyển đổi mới)",dm:"Mr.Hải",cb:"",dl:"10/07/2026",st:"active",note:"II.2.2 — Phụ thuộc II.2.1"},
+    {s:39,nd:"Mô tả PM Bán hàng phù hợp cấu trúc mới (BRD/FRD)",dm:"Mr.Hải",cb:"",dl:"10/07/2026",st:"active",note:"II.2.3 — Song song với II.2.2"},
+    {s:40,nd:"Xây dựng phương án chuyển đổi PM Bán hàng (migration, UAT, rollback)",dm:"Mr.Hải",cb:"",dl:"30/10/2026",st:"soon",note:"II.2.4 — Giai đoạn dài, báo cáo tiến độ 2 tuần/lần"},
+    {s:41,nd:"Đào tạo người dùng PM Bán hàng mới",dm:"Ms.Dương",cb:"",dl:"31/07/2026",st:"soon",note:"II.2.5 — Sau khi PM cấu hình xong & UAT pass"},
+    {s:42,nd:"Go-live PM Bán hàng (parallel run 2 tuần → chuyển hoàn toàn)",dm:"Mr.Hải",cb:"",dl:"Sau UAT",st:"soon",note:"II.2.6 — Tránh go-live ngày lễ Tết"},
+    {s:43,nd:"Nghiệm thu, hoàn thành dự án PM Bán hàng",dm:"Mr.Hải, Ms.Dương",cb:"",dl:"15/08/2026",st:"soon",note:"II.2.7 — Bao gồm hỗ trợ sau go-live"},
+    {s:"M3",nd:"GO-LIVE PM BÁN HÀNG",dm:"",cb:"",dl:"Sau UAT Pass",st:"milestone",note:""},
+  ]},
+  {id:"g9",label:"IX. CNTT — Tái cấu trúc PM Kế toán & Kho",rows:[
+    {s:44,nd:"Thực hiện bài thầu PM kế toán (soạn RFP chi tiết)",dm:"Ms.Dương, Mr.Hải",cb:"",dl:"26/06/2026",st:"urgent",note:"II.3.1 — Bắt đầu song song khi có kết quả đánh giá"},
+    {s:45,nd:"Phê duyệt bài thầu (trình BGĐ phê duyệt RFP)",dm:"Ms.Loan, Mr.Cường",cb:"",dl:"14/08/2026",st:"soon",note:"II.3.2 — Cần BGĐ duyệt"},
+    {s:46,nd:"Gọi nhà thầu đánh giá tư vấn giải pháp (gửi RFP cho 3-5 NCC, tổ chức demo)",dm:"Ms.Dương",cb:"",dl:"28/08/2026",st:"soon",note:"II.3.3 — Mời tối thiểu 3 nhà thầu"},
+    {s:47,nd:"Thống nhất giải pháp (so sánh, thương thảo hợp đồng, chốt scope & timeline)",dm:"Ms.Dương",cb:"",dl:"11/09/2026",st:"soon",note:"II.3.4"},
+    {s:48,nd:"Lựa chọn nhà thầu & ký hợp đồng triển khai",dm:"Mr.Cường",cb:"",dl:"18/09/2026",st:"soon",note:"II.3.5 — Cần BGĐ duyệt"},
+    {s:49,nd:"Chuẩn bị platform CNTT (server, network, bảo mật, dev/staging/prod)",dm:"Mr.Hải",cb:"",dl:"09/10/2026",st:"soon",note:"II.3.6 — Nhóm CNTT nội bộ thực hiện"},
+    {s:50,nd:"Setup tài khoản, module quản trị (COA, cost center, phân quyền, workflow)",dm:"Mr.Huy, Mr.Sơn",cb:"",dl:"16/10/2026",st:"soon",note:"II.3.7 — Song song II.3.6, cần input từ GĐ1"},
+    {s:51,nd:"Đối tác viết PM mảng tài chính (GL, AP, AR, FA)",dm:"Đối tác",cb:"Mr.Hải giám sát",dl:"04/12/2026",st:"soon",note:"II.3.8 — Đối tác chủ trì, CNTT giám sát & test"},
+    {s:52,nd:"Tích hợp dữ liệu (interface PM kế toán ↔ POS, kho, ngân hàng)",dm:"Đối tác",cb:"Mr.Hải giám sát",dl:"31/12/2026",st:"soon",note:"II.3.9 — Phụ thuộc II.3.8 và II.1.2"},
+    {s:53,nd:"Đối tác viết PM mảng quản trị (dashboard, BI)",dm:"Đối tác",cb:"Mr.Hải giám sát",dl:"04/12/2026",st:"soon",note:"II.3.10 — Song song với II.3.8"},
+    {s:54,nd:"Chuyển đổi dữ liệu, nhập đuổi PM mới (migration từ FAST, parallel run)",dm:"Team CVL",cb:"",dl:"30/01/2027",st:"soon",note:"II.3.11 — Sau khi tất cả module hoàn thành"},
+    {s:55,nd:"Đẩy dữ liệu quản trị lên để nghiệm thu (đối soát báo cáo cũ vs mới)",dm:"Team CVL",cb:"",dl:"27/02/2027",st:"soon",note:"II.3.12 — Nghiệm thu toàn bộ"},
+    {s:"M4",nd:"GO-LIVE PM KẾ TOÁN & KHO MỚI",dm:"",cb:"",dl:"Q1/2027",st:"milestone",note:""},
+  ]},
+  {id:"g10",label:"X. CNTT — Kế toán hợp nhất (Optional — nếu mô hình Mẹ-Con)",rows:[
+    {s:56,nd:"Chuyển đổi số dư sang hệ thống hợp nhất",dm:"",cb:"",dl:"20/03/2027",st:"soon",note:"II.4.1 — Optional, chỉ thực hiện nếu có mô hình Mẹ-Con"},
+    {s:57,nd:"Hướng dẫn nghiệp vụ kế toán hợp nhất cho nhân sự",dm:"",cb:"",dl:"03/04/2027",st:"soon",note:"II.4.2 — Optional"},
+    {s:58,nd:"Hoàn thành báo cáo tài chính hợp nhất",dm:"",cb:"",dl:"17/04/2027",st:"soon",note:"II.4.3 — Optional"},
+    {s:59,nd:"Đề xuất giải pháp PM hợp nhất tự động",dm:"",cb:"",dl:"30/04/2027",st:"soon",note:"II.4.4 — Optional"},
+  ]},
+];
+
+const ST = {
+  overdue:{label:"Quá hạn",color:"#dc2626",bg:"#fef2f2",border:"#fecaca",icon:"⚠"},
+  urgent:{label:"Cấp bách",color:"#d97706",bg:"#fffbeb",border:"#fde68a",icon:"⚡"},
+  active:{label:"Đang thực hiện",color:"#2563eb",bg:"#eff6ff",border:"#bfdbfe",icon:"▶"},
+  soon:{label:"Sắp tới",color:"#6b7280",bg:"#f9fafb",border:"#e5e7eb",icon:"◇"},
+  done:{label:"Hoàn thành",color:"#16a34a",bg:"#f0fdf4",border:"#bbf7d0",icon:"✓"},
+  milestone:{label:"Go-live",color:"#7c3aed",bg:"#f5f3ff",border:"#ddd6fe",icon:"⚑"},
+};
+const STAT_KEYS=["overdue","urgent","active","soon","done"];
+const FILTER_LIST=[{k:"all",l:"Tất cả"},{k:"overdue",l:"Quá hạn"},{k:"urgent",l:"Cấp bách"},{k:"active",l:"Đang thực hiện"},{k:"soon",l:"Sắp tới"},{k:"done",l:"Hoàn thành"}];
+
+let currentFilter="all";
+
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+function getStats(){
+  const c={overdue:0,urgent:0,active:0,soon:0,done:0,milestone:0};
+  GROUPS.forEach(g=>g.rows.forEach(r=>{if(c[r.st]!==undefined)c[r.st]++;}));
+  c.total=c.overdue+c.urgent+c.active+c.soon+c.done;
+  return c;
+}
+
+function getNextSTT(){
+  let mx=0;
+  GROUPS.forEach(g=>g.rows.forEach(r=>{if(typeof r.s==='number'&&r.s>mx)mx=r.s;}));
+  return mx+1;
+}
+
+// ─── INLINE EDIT ───
+function startEdit(gid, idx, field, el){
+  if(el.querySelector('.edit-input')) return; // already editing
+  const grp=GROUPS.find(g=>g.id===gid);
+  if(!grp||!grp.rows[idx]) return;
+  const row=grp.rows[idx];
+  const currentVal=row[field]||'';
+
+  const input=document.createElement('input');
+  input.className='edit-input';
+  input.value=currentVal;
+  el.textContent='';
+  el.appendChild(input);
+  input.focus();
+  input.select();
+
+  function save(){
+    const newVal=input.value.trim();
+    row[field]=newVal;
+    // Nếu sửa deadline → tự động cập nhật trạng thái ngay
+    if(field==='dl' && row.st!=='done' && row.st!=='milestone'){
+      const dl=parseDeadline(newVal);
+      if(dl){
+        const today=new Date(); today.setHours(0,0,0,0);
+        const diff=Math.ceil((dl-today)/(1000*60*60*24));
+        if(diff<0) row.st='overdue';
+        else if(diff<=3) row.st='urgent';
+        else if(diff<=14) row.st='active';
+        else row.st='soon';
+      }
+    }
+    render();
+    saveToLocal();
+  }
+
+  input.addEventListener('blur', save);
+  input.addEventListener('keydown', function(e){
+    if(e.key==='Enter'){e.preventDefault();save();}
+    if(e.key==='Escape'){render();} // cancel
+  });
+}
+
+// ─── LOCAL STORAGE (backup) ───
+function saveToLocal(){
+  try{localStorage.setItem('cvl2026_data',JSON.stringify(GROUPS));}catch(e){}
+}
+
+function loadFromLocal(){
+  try{
+    const saved=localStorage.getItem('cvl2026_data');
+    if(saved){
+      const data=JSON.parse(saved);
+      if(Array.isArray(data)&&data.length){
+        for(let i=0;i<GROUPS.length&&i<data.length;i++){
+          GROUPS[i].rows=data[i].rows;
+        }
+        for(let i=GROUPS.length;i<data.length;i++){
+          GROUPS.push(data[i]);
+        }
+      }
+    }
+  }catch(e){}
+}
+
+// ─── GITHUB API ───
+const GH_OWNER = 'dinhthuyduong0309-beep';
+const GH_REPO = 'Report';
+const GH_FILE = 'data.json';
+const GH_API = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
+
+function getToken(){ return localStorage.getItem('gh_token')||''; }
+function setToken(t){ localStorage.setItem('gh_token',t); }
+
+function showMsg(text, ok){
+  const d=document.createElement('div');
+  d.className='save-msg '+(ok?'save-ok':'save-err');
+  d.textContent=text;
+  document.body.appendChild(d);
+  setTimeout(()=>d.remove(), 3500);
+}
+
+function showTokenModal(){
+  const overlay=document.createElement('div');
+  overlay.className='modal-overlay';
+  overlay.innerHTML=`
+    <div class="modal-box">
+      <h3>🔑 Cài đặt mã khoá GitHub (chỉ 1 lần)</h3>
+      <p>Để lưu thay đổi trực tiếp lên GitHub, bạn cần tạo một mã khoá (Personal Access Token):</p>
+      <ol>
+        <li>Vào <b>github.com</b> → đăng nhập</li>
+        <li>Nhấn ảnh đại diện góc trên phải → <b>Settings</b></li>
+        <li>Kéo xuống cuối, nhấn <b>Developer settings</b></li>
+        <li>Nhấn <b>Personal access tokens</b> → <b>Tokens (classic)</b></li>
+        <li>Nhấn <b>Generate new token</b> → <b>Generate new token (classic)</b></li>
+        <li>Đặt tên: <b>CVL Report</b></li>
+        <li>Tick chọn ô <b>repo</b> (Full control of private repositories)</li>
+        <li>Kéo xuống nhấn <b>Generate token</b></li>
+        <li>Copy mã token (bắt đầu bằng <b>ghp_...</b>) dán vào ô bên dưới</li>
+      </ol>
+      <input type="text" id="tokenInput" placeholder="Dán mã token vào đây (ghp_...)">
+      <div class="modal-btns">
+        <button class="btn-cancel" onclick="this.closest('.modal-overlay').remove()">Huỷ</button>
+        <button class="btn-submit" onclick="submitToken()">Lưu mã khoá</button>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+  document.getElementById('tokenInput').focus();
+}
+
+function submitToken(){
+  const t=document.getElementById('tokenInput').value.trim();
+  if(!t){alert('Vui lòng nhập mã token!');return;}
+  setToken(t);
+  document.querySelector('.modal-overlay').remove();
+  showMsg('✅ Đã lưu mã khoá! Bây giờ hãy nhấn "Lưu thay đổi" lần nữa.', true);
+}
+
+async function saveToGitHub(){
+  const token=getToken();
+  if(!token){showTokenModal();return;}
+
+  const btn=document.querySelector('.btn-save');
+  const oldText=btn.innerHTML;
+  btn.innerHTML='<span class="btn-icon">⏳</span> Đang lưu...';
+  btn.classList.add('saving');
+  btn.disabled=true;
+
+  try{
+    // Lấy SHA hiện tại của data.json (nếu đã tồn tại)
+    let sha='';
+    try{
+      const res=await fetch(GH_API,{headers:{'Authorization':'token '+token}});
+      if(res.ok){const d=await res.json();sha=d.sha;}
+    }catch(e){}
+
+    // Tạo nội dung data.json
+    const content=btoa(unescape(encodeURIComponent(JSON.stringify(GROUPS,null,2))));
+
+    // Commit lên GitHub
+    const body={message:'Cập nhật tiến độ công việc - '+new Date().toLocaleString('vi-VN'),content:content};
+    if(sha)body.sha=sha;
+
+    const res=await fetch(GH_API,{
+      method:'PUT',
+      headers:{'Authorization':'token '+token,'Content-Type':'application/json'},
+      body:JSON.stringify(body)
+    });
+
+    if(res.ok){
+      showMsg('✅ Đã lưu thành công! Mọi người sẽ thấy bản mới sau 1-2 phút.', true);
+      saveToLocal();
+    }else{
+      const err=await res.json();
+      if(res.status===401){
+        localStorage.removeItem('gh_token');
+        showMsg('❌ Mã khoá hết hạn hoặc sai. Nhấn "Lưu thay đổi" để nhập lại.', false);
+      }else{
+        showMsg('❌ Lỗi: '+(err.message||'Không thể lưu'), false);
+      }
+    }
+  }catch(e){
+    showMsg('❌ Lỗi kết nối: '+e.message, false);
+  }finally{
+    btn.innerHTML=oldText;
+    btn.classList.remove('saving');
+    btn.disabled=false;
+  }
+}
+
+async function loadFromGitHub(){
+  try{
+    // Tải data.json từ GitHub Pages (public, không cần token)
+    const url=`https://${GH_OWNER}.github.io/${GH_REPO}/${GH_FILE}?t=`+Date.now();
+    const res=await fetch(url);
+    if(res.ok){
+      const data=await res.json();
+      if(Array.isArray(data)&&data.length){
+        for(let i=0;i<GROUPS.length&&i<data.length;i++){
+          GROUPS[i].rows=data[i].rows;
+        }
+        for(let i=GROUPS.length;i<data.length;i++){
+          GROUPS.push(data[i]);
+        }
+        return true;
+      }
+    }
+  }catch(e){}
+  return false;
+}
+
+// ─── RENDER ───
+function render(){
+  const stats=getStats();
+  const search=(document.getElementById('searchInput').value||'').toLowerCase();
+
+  document.getElementById('statsBar').innerHTML=STAT_KEYS.map(k=>{
+    const c=ST[k];
+    return `<div class="stat-card" style="border-color:${c.border}">
+      <div class="stat-num" style="color:${c.color}">${stats[k]}</div>
+      <div class="stat-label" style="color:${c.color}">${c.label}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('filterBar').innerHTML=FILTER_LIST.map(f=>{
+    const cnt=f.k==='all'?'':` <span class="filter-count">(${stats[f.k]||0})</span>`;
+    return `<button class="filter-btn${currentFilter===f.k?' active':''}" onclick="setFilter('${f.k}')">${f.l}${cnt}</button>`;
+  }).join('');
+
+  document.getElementById('totalCount').textContent=stats.total;
+  document.getElementById('mileCount').textContent=stats.milestone;
+
+  let html='';
+  let hasContent=false;
+  GROUPS.forEach(g=>{
+    const rows=g.rows.filter(r=>{
+      const mf=currentFilter==='all'||r.st===currentFilter;
+      const ms=!search||[r.nd,r.dm,r.cb,r.note].some(f=>(f||'').toLowerCase().includes(search));
+      return mf&&ms;
+    });
+    if(!rows.length)return;
+    hasContent=true;
+    const taskCount=rows.filter(r=>r.st!=='milestone').length;
+
+    html+=`<div class="group">
+      <div class="group-header"><span>${esc(g.label)}</span><span class="group-count">${taskCount} việc</span></div>
+      <div class="group-body"><table>
+        <thead><tr>
+          <th>STT</th><th class="col-nd">Nội dung công việc</th><th class="col-dm">Đầu mối</th>
+          <th class="col-cb">Thực hiện</th><th class="col-dl">Deadline</th><th class="col-st">Trạng thái</th><th class="col-act"></th>
+        </tr></thead><tbody>`;
+
+    rows.forEach(r=>{
+      const origIdx=g.rows.indexOf(r);
+      if(r.st==='milestone'){
+        html+=`<tr class="milestone-row"><td colspan="7"><span class="milestone-text">⚑ ${esc(r.nd)} — ${esc(r.dl)}</span></td></tr>`;
+        return;
+      }
+      const c=ST[r.st]||ST.soon;
+      const noteHtml=r.note?`<div class="td-note editable" onclick="startEdit('${g.id}',${origIdx},'note',this)">${esc(r.note)}</div>`
+                           :`<div class="td-note editable" onclick="startEdit('${g.id}',${origIdx},'note',this)" style="color:#cbd5e1;font-style:italic">+ ghi chú</div>`;
+      const opts=STAT_KEYS.map(k=>`<option value="${k}"${r.st===k?' selected':''}>${ST[k].icon} ${ST[k].label}</option>`).join('');
+
+      html+=`<tr>
+        <td>${r.s}</td>
+        <td>
+          <div class="td-task editable" onclick="startEdit('${g.id}',${origIdx},'nd',this)">${esc(r.nd)}</div>
+          ${noteHtml}
+        </td>
+        <td>
+          <div class="td-dm editable" onclick="startEdit('${g.id}',${origIdx},'dm',this)">${r.dm?esc(r.dm):'<span style=color:#cbd5e1;font-style:italic>+ đầu mối</span>'}</div>
+        </td>
+        <td>
+          <div class="td-cb editable" onclick="startEdit('${g.id}',${origIdx},'cb',this)">${r.cb?esc(r.cb):'<span style=color:#cbd5e1;font-style:italic>+ thực hiện</span>'}</div>
+        </td>
+        <td>
+          <div class="td-dl dl-${r.st} editable" onclick="startEdit('${g.id}',${origIdx},'dl',this)">${r.dl?esc(r.dl):'<span style=color:#cbd5e1;font-style:italic>+ deadline</span>'}</div>
+        </td>
+        <td><select class="status-select ss-${r.st}" onchange="changeStatus('${g.id}',${origIdx},this.value)">${opts}</select></td>
+        <td><button class="btn-del" title="Xóa" onclick="deleteTask('${g.id}',${origIdx})">✕</button></td>
+      </tr>`;
+    });
+
+    html+=`</tbody></table></div></div>`;
+  });
+
+  if(!hasContent){
+    html=`<div class="empty"><div class="empty-icon">∅</div><div class="empty-text">Không có công việc nào phù hợp bộ lọc</div></div>`;
+  }
+  document.getElementById('board').innerHTML=html;
+}
+
+// ─── ACTIONS ───
+function setFilter(f){currentFilter=f;render();}
+
+function toggleForm(){
+  const p=document.getElementById('formPanel');
+  const isHidden=p.style.display==='none';
+  p.style.display=isHidden?'block':'none';
+  if(isHidden){
+    const sel=document.getElementById('fGroup');
+    sel.innerHTML='<option value="">— Chọn nhóm —</option>'+GROUPS.map(g=>`<option value="${g.id}">${g.label}</option>`).join('');
+    document.getElementById('fNd').focus();
+  }
+}
+
+function addTask(){
+  const nd=document.getElementById('fNd').value.trim();
+  const gid=document.getElementById('fGroup').value;
+  if(!nd||!gid)return;
+  const row={s:getNextSTT(),nd:nd,dm:document.getElementById('fDm').value.trim(),cb:document.getElementById('fCb').value.trim(),dl:document.getElementById('fDl').value.trim(),st:document.getElementById('fSt').value,note:document.getElementById('fNote').value.trim()};
+  const grp=GROUPS.find(g=>g.id===gid);
+  if(grp){
+    const mileIdx=grp.rows.findIndex(r=>r.st==='milestone');
+    if(mileIdx>=0)grp.rows.splice(mileIdx,0,row);
+    else grp.rows.push(row);
+  }
+  ['fNd','fDm','fCb','fDl','fNote'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fSt').value='active';
+  document.getElementById('fGroup').value='';
+  toggleForm();
+  render();
+  saveToLocal();
+}
+
+function changeStatus(gid,idx,val){
+  const grp=GROUPS.find(g=>g.id===gid);
+  if(grp&&grp.rows[idx]){grp.rows[idx].st=val;}
+  render();
+  saveToLocal();
+}
+
+function deleteTask(gid,idx){
+  if(!confirm('Bạn có chắc muốn xóa công việc này?'))return;
+  const grp=GROUPS.find(g=>g.id===gid);
+  if(grp){grp.rows.splice(idx,1);render();saveToLocal();}
+}
+
+function exportExcel(){
+  const data=[];
+  GROUPS.forEach(g=>{
+    g.rows.forEach(r=>{
+      data.push({
+        "STT":r.s,
+        "Nhóm":g.label,
+        "Nội dung công việc":r.nd,
+        "Đầu mối":r.dm,
+        "Cán bộ thực hiện":r.cb,
+        "Deadline":r.dl,
+        "Trạng thái":(ST[r.st]||{}).label||r.st,
+        "Ghi chú":r.note
+      });
+    });
+  });
+  const ws=XLSX.utils.json_to_sheet(data);
+  ws["!cols"]=[{wch:5},{wch:40},{wch:55},{wch:24},{wch:30},{wch:14},{wch:16},{wch:42}];
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,"Kế hoạch CVL 2026");
+  XLSX.writeFile(wb,"Ke_hoach_CVL_2026.xlsx");
+}
+
+// ─── TỰ ĐỘNG CẬP NHẬT TRẠNG THÁI THEO DEADLINE ───
+function parseDeadline(dlStr) {
+  if (!dlStr) return null;
+  
+  // Format: "dd/mm/yyyy" (ví dụ: 15/06/2026)
+  let m = dlStr.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+  if (m) return new Date(parseInt(m[3]), parseInt(m[2]) - 1, parseInt(m[1]));
+  
+  // Format: "Trước dd/mm" hoặc "dd/mm" (thiếu năm → mặc định 2026)
+  m = dlStr.match(/(\d{1,2})\/(\d{1,2})(?!\/\d)/);
+  if (m) return new Date(2026, parseInt(m[2]) - 1, parseInt(m[1]));
+  
+  // Format: "Q1/2027", "Q2/2026"...
+  m = dlStr.match(/Q(\d)\/(\d{4})/);
+  if (m) {
+    const qMonth = (parseInt(m[1]) - 1) * 3 + 2; // Q1→tháng 3, Q2→tháng 6...
+    return new Date(parseInt(m[2]), qMonth, 28);
+  }
+  
+  // Không parse được (ví dụ: "Sau chọn PM", "Sau UAT") → bỏ qua
+  return null;
+}
+
+function autoUpdateStatus() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  
+  GROUPS.forEach(g => {
+    g.rows.forEach(r => {
+      // Bỏ qua: đã hoàn thành, milestone, hoặc không có deadline
+      if (r.st === 'done' || r.st === 'milestone') return;
+      
+      const dl = parseDeadline(r.dl);
+      if (!dl) return; // Deadline không parse được → giữ nguyên
+      
+      const diffDays = Math.ceil((dl - today) / (1000 * 60 * 60 * 24));
+      
+      if (diffDays < 0) {
+        // Đã quá hạn
+        r.st = 'overdue';
+      } else if (diffDays <= 3) {
+        // Còn 0-3 ngày → Cấp bách
+        r.st = 'urgent';
+      } else if (diffDays <= 14) {
+        // Còn 4-14 ngày → Đang thực hiện
+        r.st = 'active';
+      } else {
+        // Còn hơn 14 ngày → Sắp tới
+        r.st = 'soon';
+      }
+    });
+  });
+}
+
+// ─── INIT ───
+document.getElementById('updateDate').textContent=new Date().toLocaleDateString('vi-VN');
+
+// Tải dữ liệu: ưu tiên GitHub → localStorage → dữ liệu mặc định
+(async function init(){
+  const fromGH = await loadFromGitHub();
+  if(!fromGH) loadFromLocal();
+  autoUpdateStatus();
+  render();
+})();
+</script>
+
+
+
+</body></html>
