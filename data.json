@@ -10,7 +10,7 @@
         "cb": "GĐ Cường, CFO Cường, Nhân",
         "dl": "15/06/2026",
         "st": "overdue",
-        "note": "Chưa làm việc với Bravo"
+        "note": "Bỏ không làm với  Bravo nữa!"
       },
       {
         "s": 2,
@@ -184,6 +184,15 @@
         "cb": "Anh Cường, Chị Hiền kết hợp",
         "dl": "30/08/2026",
         "st": "soon",
+        "note": ""
+      },
+      {
+        "s": 60,
+        "nd": "Làm sạch dữ liệu kho , CCDC, TSCĐ toàn hệ thống",
+        "dm": "Mr Cường, Mrs  Hiền",
+        "cb": "Mrs Thủy, Mrs  Hiền",
+        "dl": "30/06/2026",
+        "st": "active",
         "note": ""
       }
     ]
