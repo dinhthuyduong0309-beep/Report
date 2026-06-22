@@ -9,7 +9,7 @@
         "dm": "Loan",
         "cb": "GĐ Cường, CFO Cường, Nhân",
         "dl": "15/06/2026",
-        "st": "overdue",
+        "st": "done",
         "note": "Bỏ không làm với  Bravo nữa!"
       },
       {
@@ -18,7 +18,7 @@
         "dm": "Ban ĐH dự án",
         "cb": "Tất cả phòng ban",
         "dl": "Trước 21/06",
-        "st": "overdue",
+        "st": "done",
         "note": "Gửi để bộ phận tự đánh giá"
       },
       {
@@ -37,7 +37,7 @@
         "cb": "Đại diện Bravo",
         "dl": "Trước 21/06",
         "st": "overdue",
-        "note": ""
+        "note": "Bỏ phần này"
       },
       {
         "s": 5,
