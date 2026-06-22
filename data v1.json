@@ -1,0 +1,629 @@
+[
+  {
+    "id": "g1",
+    "label": "I. Đánh giá & quyết định phần mềm",
+    "rows": [
+      {
+        "s": 1,
+        "nd": "Làm việc với MISA, FAST và Bravo",
+        "dm": "Loan",
+        "cb": "GĐ Cường, CFO Cường, Nhân",
+        "dl": "15/06/2026",
+        "st": "urgent",
+        "note": "Chưa làm việc với Bravo"
+      },
+      {
+        "s": 2,
+        "nd": "Lập file checklist mô tả ứng dụng cụ thể từng module theo từng phần mềm cho từng phòng ban",
+        "dm": "Ban ĐH dự án",
+        "cb": "Tất cả phòng ban",
+        "dl": "Trước 21/06",
+        "st": "urgent",
+        "note": "Gửi để bộ phận tự đánh giá"
+      },
+      {
+        "s": 3,
+        "nd": "Các phòng ban nghiên cứu, đánh giá từng chức năng phần mềm theo nghiệp vụ thực tế",
+        "dm": "Tất cả PB",
+        "cb": "Ban ĐH theo dõi",
+        "dl": "Trước 21/06",
+        "st": "urgent",
+        "note": "Xác định: đáp ứng / còn thiếu / cần tùy chỉnh"
+      },
+      {
+        "s": 4,
+        "nd": "Yêu cầu Bravo làm rõ: tích hợp API với POS, AI/trợ lý ảo, khả năng đáp ứng đặc thù CVL",
+        "dm": "Ông Cường, Bà Loan",
+        "cb": "Đại diện Bravo",
+        "dl": "Trước 21/06",
+        "st": "urgent",
+        "note": ""
+      },
+      {
+        "s": 5,
+        "nd": "Yêu cầu MISA làm rõ: CRM chuyên sâu nhà hàng, chấm công đa cơ sở, hành trình khách hàng",
+        "dm": "Bà Loan, Bà Hằng, Bà Quỳnh",
+        "cb": "Đại diện MISA",
+        "dl": "Trước 21/06",
+        "st": "urgent",
+        "note": "262K thành viên, hợp nhất đa kênh"
+      },
+      {
+        "s": 6,
+        "nd": "Ký hợp đồng với đơn vị phần mềm được chọn",
+        "dm": "Anh Cường",
+        "cb": "",
+        "dl": "20/06/2026",
+        "st": "urgent",
+        "note": ""
+      },
+      {
+        "s": 7,
+        "nd": "Chốt lựa chọn phần mềm cuối cùng (MISA hoặc Bravo)",
+        "dm": "Ông Cường, Bà Loan",
+        "cb": "",
+        "dl": "21/06/2026",
+        "st": "urgent",
+        "note": "Dựa trên nhu cầu thực tế"
+      }
+    ]
+  },
+  {
+    "id": "g2",
+    "label": "II. Xây dựng quy trình & số hóa",
+    "rows": [
+      {
+        "s": 8,
+        "nd": "Mô tả nghiệp vụ Bán hàng, nghiệp vụ Kho và đưa ra phương án cải tiến",
+        "dm": "Loan",
+        "cb": "Thủy, Anh Cường",
+        "dl": "20/05/2026",
+        "st": "done",
+        "note": "Đã hoàn thành"
+      },
+      {
+        "s": 9,
+        "nd": "Chốt quy trình đề xuất mô hình BH-DT",
+        "dm": "Ông Cường, team CVL, Bà Thủy",
+        "cb": "",
+        "dl": "09/06/2026",
+        "st": "overdue",
+        "note": "Họp chốt Thứ 3 – 09/06"
+      },
+      {
+        "s": 10,
+        "nd": "Xây dựng bộ quy trình mua sắm, nhập kho, điều chuyển, trả lại...",
+        "dm": "Bà Thủy",
+        "cb": "Bà Hoàng Anh thiết lập",
+        "dl": "25/06/2026",
+        "st": "active",
+        "note": ""
+      },
+      {
+        "s": 11,
+        "nd": "Viết quy trình để số hoá lên phần mềm",
+        "dm": "Thủy",
+        "cb": "Hoàng Anh kết hợp",
+        "dl": "25/06/2026",
+        "st": "active",
+        "note": ""
+      },
+      {
+        "s": 12,
+        "nd": "Nghiên cứu bố trí lại kho khoa học – chuẩn bị cân, thùng, Layout A1-B1-C1",
+        "dm": "Ông Cường + team CVL",
+        "cb": "",
+        "dl": "30/06/2026",
+        "st": "active",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "id": "g3",
+    "label": "III. Kiểm kê tài sản & chuẩn hóa dữ liệu",
+    "rows": [
+      {
+        "s": 13,
+        "nd": "Tổ chức kiểm kê TSCĐ, CCDC, Nguyên vật liệu – đồng nhất mã, làm sạch dữ liệu",
+        "dm": "Anh Cường (CFO)",
+        "cb": "Thủy kết hợp",
+        "dl": "10/06/2026",
+        "st": "overdue",
+        "note": "Ra báo cáo và hướng xử lý"
+      },
+      {
+        "s": 14,
+        "nd": "Chốt bộ mã TSCĐ – CCDC, Nguyên vật liệu (đồng nhất mã toàn hệ thống)",
+        "dm": "Bà Loan",
+        "cb": "",
+        "dl": "Sau kiểm kê",
+        "st": "active",
+        "note": ""
+      },
+      {
+        "s": 15,
+        "nd": "Rà soát tài sản, công nợ, hồ sơ pháp lý các công ty cũ",
+        "dm": "Bà Loan",
+        "cb": "Liên quan",
+        "dl": "Theo tiến độ",
+        "st": "active",
+        "note": "Ưu tiên sáp nhập thay giải thể"
+      },
+      {
+        "s": 16,
+        "nd": "Rà soát đưa dữ liệu đầu kỳ lên; dự kiến Go-live 01/07 phần mềm Kế toán và Kho",
+        "dm": "Thủy",
+        "cb": "Anh Cường kết hợp",
+        "dl": "15/06/2026",
+        "st": "urgent",
+        "note": "Thủy báo cáo chi tiết"
+      },
+      {
+        "s": 17,
+        "nd": "Lên các báo cáo quản trị mẫu bằng Excel để thực hiện công tác số hoá",
+        "dm": "Huy",
+        "cb": "Anh Cường kết hợp",
+        "dl": "30/06/2026",
+        "st": "active",
+        "note": "Huy báo cáo chi tiết"
+      },
+      {
+        "s": 18,
+        "nd": "Lên bài thầu toàn bộ các hạng mục",
+        "dm": "Dương",
+        "cb": "",
+        "dl": "15/06/2026",
+        "st": "urgent",
+        "note": ""
+      },
+      {
+        "s": 19,
+        "nd": "Thẩm định lại toàn bộ số liệu để soát vốn lên holding",
+        "dm": "Thủy",
+        "cb": "Anh Cường, Chị Hiền kết hợp",
+        "dl": "30/08/2026",
+        "st": "soon",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "id": "g4",
+    "label": "IV. Triển khai phần mềm & Go-live",
+    "rows": [
+      {
+        "s": 20,
+        "nd": "Triển khai Module Kho, TSCĐ, CCDC, Mua hàng",
+        "dm": "Loan",
+        "cb": "Anh Cường + đội mua hàng",
+        "dl": "01/07/2026",
+        "st": "active",
+        "note": ""
+      },
+      {
+        "s": 21,
+        "nd": "Triển khai module Bán hàng (tích hợp phần mềm)",
+        "dm": "Thủy",
+        "cb": "Chị Loan + Anh Cường",
+        "dl": "15/07/2026",
+        "st": "active",
+        "note": "Báo cáo lại chi tiết khi thực hiện"
+      },
+      {
+        "s": 22,
+        "nd": "Triển khai module Kế toán",
+        "dm": "Thủy",
+        "cb": "Chị Hiền kết hợp",
+        "dl": "01/08/2026",
+        "st": "active",
+        "note": ""
+      },
+      {
+        "s": 23,
+        "nd": "Chốt số dư đầu kỳ (SDĐK)",
+        "dm": "Bà Hiền (KTT), Bà Thủy, Ông Bá Anh",
+        "cb": "",
+        "dl": "26/07/2026",
+        "st": "active",
+        "note": ""
+      },
+      {
+        "s": 24,
+        "nd": "Xây dựng định mức suất ăn (song song Kế toán – Bếp)",
+        "dm": "Ông Cường + team CVL, Ông Huy",
+        "cb": "",
+        "dl": "31/07/2026",
+        "st": "active",
+        "note": ""
+      },
+      {
+        "s": 25,
+        "nd": "Đào tạo người dùng theo từng nghiệp vụ trước Go-live",
+        "dm": "Ban ĐH dự án",
+        "cb": "",
+        "dl": "Trước 01/08",
+        "st": "active",
+        "note": ""
+      },
+      {
+        "s": "M1",
+        "nd": "GO-LIVE KẾ TOÁN",
+        "dm": "",
+        "cb": "",
+        "dl": "01/08/2026",
+        "st": "milestone",
+        "note": ""
+      },
+      {
+        "s": "M2",
+        "nd": "GO-LIVE KHO / TSCĐ / CCDC",
+        "dm": "",
+        "cb": "",
+        "dl": "10/08/2026",
+        "st": "milestone",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "id": "g5",
+    "label": "V. Nhân sự, KPI & vận hành",
+    "rows": [
+      {
+        "s": 26,
+        "nd": "Đào tạo, setup lại phòng kế toán (soạn bài giảng, set up lại phòng kế toán)",
+        "dm": "Hoàng Anh",
+        "cb": "Chị Hiền kết hợp",
+        "dl": "15/09/2026",
+        "st": "soon",
+        "note": ""
+      },
+      {
+        "s": 27,
+        "nd": "Xây dựng bảng lương và các quy chế bán hàng",
+        "dm": "Loan",
+        "cb": "Anh Cường, Huy, 1 bạn NS hỗ trợ",
+        "dl": "31/01/2027",
+        "st": "soon",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "id": "g6",
+    "label": "VI. Báo cáo, tích hợp & số hóa toàn diện",
+    "rows": [
+      {
+        "s": 28,
+        "nd": "Số hoá các báo cáo quản trị",
+        "dm": "Huy",
+        "cb": "Anh Cường + Sơn kết hợp",
+        "dl": "01/08/2026",
+        "st": "active",
+        "note": ""
+      },
+      {
+        "s": 29,
+        "nd": "Xây dựng báo cáo hợp nhất và hướng dẫn thực hiện, số hoá",
+        "dm": "Huy",
+        "cb": "Anh Cường, Sơn kết hợp",
+        "dl": "15/02/2027",
+        "st": "soon",
+        "note": ""
+      },
+      {
+        "s": 30,
+        "nd": "Hợp nhất CRM đa kênh (Hotline, Facebook, Zalo, TikTok) về một hệ thống",
+        "dm": "Bà Quỳnh (MKT)",
+        "cb": "Bà Loan phối hợp",
+        "dl": "Sau chọn PM",
+        "st": "soon",
+        "note": "262K thành viên, chưa theo dõi vãng lai"
+      },
+      {
+        "s": 31,
+        "nd": "Thiết lập theo dõi hành trình khách hàng đầy đủ",
+        "dm": "Bà Quỳnh (MKT)",
+        "cb": "Bà Loan phối hợp",
+        "dl": "Sau chọn PM",
+        "st": "soon",
+        "note": ""
+      },
+      {
+        "s": 32,
+        "nd": "Đo lường hiệu quả chiến dịch Marketing theo từng kênh",
+        "dm": "Bà Quỳnh (MKT)",
+        "cb": "Anh Cường, Sơn kết hợp",
+        "dl": "Sau chọn PM",
+        "st": "soon",
+        "note": ""
+      },
+      {
+        "s": 33,
+        "nd": "Tích hợp và đồng bộ dữ liệu toàn hệ thống",
+        "dm": "Hải",
+        "cb": "Huy, Sơn kết hợp",
+        "dl": "31/03/2027",
+        "st": "soon",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "id": "g7",
+    "label": "VII. CNTT — Tích hợp hệ thống",
+    "rows": [
+      {
+        "s": 34,
+        "nd": "Đánh giá các hệ thống hiện tại của DN (POS, kế toán, kho, CRM)",
+        "dm": "Mr.Hải",
+        "cb": "",
+        "dl": "26/06/2026",
+        "st": "urgent",
+        "note": "II.1.1 — Ưu tiên cao, nền tảng cho toàn bộ GĐ2"
+      },
+      {
+        "s": 35,
+        "nd": "Kết nối đồng bộ Real-time POS – HTK – Kế toán (API/middleware)",
+        "dm": "Mr.Hải",
+        "cb": "",
+        "dl": "31/07/2026",
+        "st": "active",
+        "note": "II.1.2 — Phụ thuộc II.1.1, có thể song song giai đoạn đánh giá"
+      },
+      {
+        "s": 36,
+        "nd": "Sơ đồ phần mềm hiện tại của CVL (tổng quan hóa toàn bộ PM đang dùng)",
+        "dm": "Mr.Hải",
+        "cb": "",
+        "dl": "26/06/2026",
+        "st": "urgent",
+        "note": "II.1.3"
+      }
+    ]
+  },
+  {
+    "id": "g8",
+    "label": "VIII. CNTT — Tái cấu trúc PM Bán hàng",
+    "rows": [
+      {
+        "s": 37,
+        "nd": "Đánh giá phần mềm Bán hàng (POS hiện tại: tính năng, hiệu suất, bảo mật)",
+        "dm": "Mr.Hải",
+        "cb": "",
+        "dl": "26/06/2026",
+        "st": "urgent",
+        "note": "II.2.1 — Song song với II.1.2"
+      },
+      {
+        "s": 38,
+        "nd": "Tư vấn điều chỉnh PM Bán hàng (nâng cấp / tích hợp / chuyển đổi mới)",
+        "dm": "Mr.Hải",
+        "cb": "",
+        "dl": "10/07/2026",
+        "st": "active",
+        "note": "II.2.2 — Phụ thuộc II.2.1"
+      },
+      {
+        "s": 39,
+        "nd": "Mô tả PM Bán hàng phù hợp cấu trúc mới (BRD/FRD)",
+        "dm": "Mr.Hải",
+        "cb": "",
+        "dl": "10/07/2026",
+        "st": "active",
+        "note": "II.2.3 — Song song với II.2.2"
+      },
+      {
+        "s": 40,
+        "nd": "Xây dựng phương án chuyển đổi PM Bán hàng (migration, UAT, rollback)",
+        "dm": "Mr.Hải",
+        "cb": "",
+        "dl": "30/10/2026",
+        "st": "soon",
+        "note": "II.2.4 — Giai đoạn dài, báo cáo tiến độ 2 tuần/lần"
+      },
+      {
+        "s": 41,
+        "nd": "Đào tạo người dùng PM Bán hàng mới",
+        "dm": "Ms.Dương",
+        "cb": "",
+        "dl": "31/07/2026",
+        "st": "soon",
+        "note": "II.2.5 — Sau khi PM cấu hình xong & UAT pass"
+      },
+      {
+        "s": 42,
+        "nd": "Go-live PM Bán hàng (parallel run 2 tuần → chuyển hoàn toàn)",
+        "dm": "Mr.Hải",
+        "cb": "",
+        "dl": "Sau UAT",
+        "st": "soon",
+        "note": "II.2.6 — Tránh go-live ngày lễ Tết"
+      },
+      {
+        "s": 43,
+        "nd": "Nghiệm thu, hoàn thành dự án PM Bán hàng",
+        "dm": "Mr.Hải, Ms.Dương",
+        "cb": "",
+        "dl": "15/08/2026",
+        "st": "soon",
+        "note": "II.2.7 — Bao gồm hỗ trợ sau go-live"
+      },
+      {
+        "s": "M3",
+        "nd": "GO-LIVE PM BÁN HÀNG",
+        "dm": "",
+        "cb": "",
+        "dl": "Sau UAT Pass",
+        "st": "milestone",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "id": "g9",
+    "label": "IX. CNTT — Tái cấu trúc PM Kế toán & Kho",
+    "rows": [
+      {
+        "s": 44,
+        "nd": "Thực hiện bài thầu PM kế toán (soạn RFP chi tiết)",
+        "dm": "Ms.Dương, Mr.Hải",
+        "cb": "",
+        "dl": "26/06/2026",
+        "st": "urgent",
+        "note": "II.3.1 — Bắt đầu song song khi có kết quả đánh giá"
+      },
+      {
+        "s": 45,
+        "nd": "Phê duyệt bài thầu (trình BGĐ phê duyệt RFP)",
+        "dm": "Ms.Loan, Mr.Cường",
+        "cb": "",
+        "dl": "14/08/2026",
+        "st": "soon",
+        "note": "II.3.2 — Cần BGĐ duyệt"
+      },
+      {
+        "s": 46,
+        "nd": "Gọi nhà thầu đánh giá tư vấn giải pháp (gửi RFP cho 3-5 NCC, tổ chức demo)",
+        "dm": "Ms.Dương",
+        "cb": "",
+        "dl": "28/08/2026",
+        "st": "soon",
+        "note": "II.3.3 — Mời tối thiểu 3 nhà thầu"
+      },
+      {
+        "s": 47,
+        "nd": "Thống nhất giải pháp (so sánh, thương thảo hợp đồng, chốt scope & timeline)",
+        "dm": "Ms.Dương",
+        "cb": "",
+        "dl": "11/09/2026",
+        "st": "soon",
+        "note": "II.3.4"
+      },
+      {
+        "s": 48,
+        "nd": "Lựa chọn nhà thầu & ký hợp đồng triển khai",
+        "dm": "Mr.Cường",
+        "cb": "",
+        "dl": "18/09/2026",
+        "st": "soon",
+        "note": "II.3.5 — Cần BGĐ duyệt"
+      },
+      {
+        "s": 49,
+        "nd": "Chuẩn bị platform CNTT (server, network, bảo mật, dev/staging/prod)",
+        "dm": "Mr.Hải",
+        "cb": "",
+        "dl": "09/10/2026",
+        "st": "soon",
+        "note": "II.3.6 — Nhóm CNTT nội bộ thực hiện"
+      },
+      {
+        "s": 50,
+        "nd": "Setup tài khoản, module quản trị (COA, cost center, phân quyền, workflow)",
+        "dm": "Mr.Huy, Mr.Sơn",
+        "cb": "",
+        "dl": "16/10/2026",
+        "st": "soon",
+        "note": "II.3.7 — Song song II.3.6, cần input từ GĐ1"
+      },
+      {
+        "s": 51,
+        "nd": "Đối tác viết PM mảng tài chính (GL, AP, AR, FA)",
+        "dm": "Đối tác",
+        "cb": "Mr.Hải giám sát",
+        "dl": "04/12/2026",
+        "st": "soon",
+        "note": "II.3.8 — Đối tác chủ trì, CNTT giám sát & test"
+      },
+      {
+        "s": 52,
+        "nd": "Tích hợp dữ liệu (interface PM kế toán ↔ POS, kho, ngân hàng)",
+        "dm": "Đối tác",
+        "cb": "Mr.Hải giám sát",
+        "dl": "31/12/2026",
+        "st": "soon",
+        "note": "II.3.9 — Phụ thuộc II.3.8 và II.1.2"
+      },
+      {
+        "s": 53,
+        "nd": "Đối tác viết PM mảng quản trị (dashboard, BI)",
+        "dm": "Đối tác",
+        "cb": "Mr.Hải giám sát",
+        "dl": "04/12/2026",
+        "st": "soon",
+        "note": "II.3.10 — Song song với II.3.8"
+      },
+      {
+        "s": 54,
+        "nd": "Chuyển đổi dữ liệu, nhập đuổi PM mới (migration từ FAST, parallel run)",
+        "dm": "Team CVL",
+        "cb": "",
+        "dl": "30/01/2027",
+        "st": "soon",
+        "note": "II.3.11 — Sau khi tất cả module hoàn thành"
+      },
+      {
+        "s": 55,
+        "nd": "Đẩy dữ liệu quản trị lên để nghiệm thu (đối soát báo cáo cũ vs mới)",
+        "dm": "Team CVL",
+        "cb": "",
+        "dl": "27/02/2027",
+        "st": "soon",
+        "note": "II.3.12 — Nghiệm thu toàn bộ"
+      },
+      {
+        "s": "M4",
+        "nd": "GO-LIVE PM KẾ TOÁN & KHO MỚI",
+        "dm": "",
+        "cb": "",
+        "dl": "Q1/2027",
+        "st": "milestone",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "id": "g10",
+    "label": "X. CNTT — Kế toán hợp nhất (Optional — nếu mô hình Mẹ-Con)",
+    "rows": [
+      {
+        "s": 56,
+        "nd": "Chuyển đổi số dư sang hệ thống hợp nhất",
+        "dm": "",
+        "cb": "",
+        "dl": "20/03/2027",
+        "st": "soon",
+        "note": "II.4.1 — Optional, chỉ thực hiện nếu có mô hình Mẹ-Con"
+      },
+      {
+        "s": 57,
+        "nd": "Hướng dẫn nghiệp vụ kế toán hợp nhất cho nhân sự",
+        "dm": "",
+        "cb": "",
+        "dl": "03/04/2027",
+        "st": "soon",
+        "note": "II.4.2 — Optional"
+      },
+      {
+        "s": 58,
+        "nd": "Hoàn thành báo cáo tài chính hợp nhất",
+        "dm": "",
+        "cb": "",
+        "dl": "17/04/2027",
+        "st": "soon",
+        "note": "II.4.3 — Optional"
+      },
+      {
+        "s": 59,
+        "nd": "Đề xuất giải pháp PM hợp nhất tự động",
+        "dm": "",
+        "cb": "",
+        "dl": "30/04/2027",
+        "st": "soon",
+        "note": "II.4.4 — Optional"
+      }
+    ]
+  }
+]
