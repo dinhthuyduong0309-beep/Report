@@ -17,8 +17,8 @@
         "nd": "Lập file checklist mô tả ứng dụng cụ thể từng module theo từng phần mềm cho từng phòng ban",
         "dm": "Ban ĐH dự án",
         "cb": "Tất cả phòng ban",
-        "dl": "Trước 21/06",
-        "st": "done",
+        "dl": "21/06/2026",
+        "st": "overdue",
         "note": "Gửi để bộ phận tự đánh giá"
       },
       {
@@ -65,6 +65,24 @@
         "dl": "30/06/2026",
         "st": "active",
         "note": "Dựa trên nhu cầu thực tế"
+      },
+      {
+        "s": 61,
+        "nd": "So sánh giá , chức năng của PM Misa & Fast",
+        "dm": "Mrs Loan , Mrs. Dương",
+        "cb": "",
+        "dl": "25/06/2026",
+        "st": "active",
+        "note": ""
+      },
+      {
+        "s": 62,
+        "nd": "So sánh giá của PM Cukcuk và PM Rkeeper",
+        "dm": "Mrs.Loan, Mrs. Dương",
+        "cb": "",
+        "dl": "30/06/2026",
+        "st": "active",
+        "note": ""
       }
     ]
   },
@@ -87,13 +105,13 @@
         "dm": "Ông Cường, team CVL, Bà Thủy",
         "cb": "",
         "dl": "09/06/2026",
-        "st": "overdue",
+        "st": "done",
         "note": "Họp chốt Thứ 3 – 09/06"
       },
       {
         "s": 10,
         "nd": "Xây dựng bộ quy trình mua sắm, nhập kho, điều chuyển, trả lại...",
-        "dm": "Bà Thủy",
+        "dm": "Mrs Thủy",
         "cb": "Bà Hoàng Anh thiết lập",
         "dl": "25/06/2026",
         "st": "urgent",
@@ -102,7 +120,7 @@
       {
         "s": 11,
         "nd": "Viết quy trình để số hoá lên phần mềm",
-        "dm": "Thủy",
+        "dm": "Mrs Thủy",
         "cb": "Hoàng Anh kết hợp",
         "dl": "25/06/2026",
         "st": "urgent",
