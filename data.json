@@ -134,6 +134,15 @@
         "dl": "30/06/2026",
         "st": "active",
         "note": ""
+      },
+      {
+        "s": 64,
+        "nd": "Các trường thông tin cần bổ sung , bán hàng bổ sung gì, mua hàng bổ sung gì phục vụ mục đích quản trị",
+        "dm": "Mr. Huy, Mr Sơn",
+        "cb": "",
+        "dl": "30/06/2026",
+        "st": "active",
+        "note": ""
       }
     ]
   },
@@ -373,6 +382,24 @@
         "cb": "Huy, Sơn kết hợp",
         "dl": "31/03/2027",
         "st": "soon",
+        "note": ""
+      },
+      {
+        "s": 63,
+        "nd": "Báo cáo giải pháp quản trị trong tương lai CVL",
+        "dm": "Mr Huy, Mr Sơn",
+        "cb": "",
+        "dl": "27/06/2026",
+        "st": "active",
+        "note": ""
+      },
+      {
+        "s": 65,
+        "nd": "Hệ thống báo cáo Tương lai, Dashboard BI mô hình demo",
+        "dm": "Mr. Huy, Mr Sơn",
+        "cb": "",
+        "dl": "30/06/2026",
+        "st": "active",
         "note": ""
       }
     ]
